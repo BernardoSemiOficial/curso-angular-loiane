@@ -1,8 +1,13 @@
 <main>
-  <!-- <app-data-binding></app-data-binding> -->
-  <app-ciclo *ngIf="isVisibleCiclo" [cicloValor]="cicloValor"></app-ciclo>
-  <button class="btn btn-primary" (click)="incrementarCicloValor()">++</button>
-  <button class="btn btn-secondary" (click)="esconderCiclo()">
-    esconder componente de ciclo
-  </button>
+  <app-data-binding></app-data-binding>
+  <!-- <section>
+    <h2>Ciclo de vida do componente</h2>
+    <app-ciclo *ngIf="isVisibleCiclo" [cicloValor]="cicloValor"></app-ciclo>
+    <button class="btn btn-primary" (click)="incrementarCicloValor()">
+      ++
+    </button>
+    <button class="btn btn-secondary" (click)="esconderCiclo()">
+      esconder componente de ciclo
+    </button>
+  </section> -->
 </main>

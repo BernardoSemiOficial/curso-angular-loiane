@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-contador',
@@ -13,10 +20,12 @@ export class OutputPropertyComponent {
     lastAction: 'increment' | 'decrement';
   }>();
 
+  @ViewChild('inputContadorValue') inputContador!: ElementRef;
+
   handleClickIncrement() {
-    this.contadorValue++;
+    this.inputContador.nativeElement.value++;
     this.contadorContext.emit({
-      contadorValue: this.contadorValue,
+      contadorValue: this.inputContador.nativeElement.value,
       lastAction: 'increment',
     });
   }
