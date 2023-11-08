@@ -1,0 +1,40 @@
+<section class="two-data-binding">
+  <h2>Two Data Binding</h2>
+
+  <article>
+    <input
+      type="text"
+      [value]="inputValueNome"
+      (input)="handleInputNome(inputValueName.value)"
+      #inputValueName
+    />
+
+    <p>Valor digitado {{ inputValueNome }}</p>
+  </article>
+  <article>
+    <input
+      type="text"
+      [value]="valueSobrenome"
+      (input)="valueSobrenome = inputValueSobrenome.value"
+      #inputValueSobrenome
+    />
+    <p>Sobrenome: {{ valueSobrenome }}</p>
+  </article>
+  <article>
+    <input type="text" [(ngModel)]="familia" />
+    <p>Família: {{ familia }}</p>
+  </article>
+  <article>
+    <input
+      type="text"
+      [ngModel]="nacionalidade"
+      (ngModelChange)="nacionalidade = $event"
+    />
+    <p>Nacionalidade: {{ nacionalidade }}</p>
+  </article>
+  <article>
+    <input type="text" [(ngModel)]="people.name" />
+    <input type="text" [(ngModel)]="people.sobrenome" />
+    <p>Meu nome é {{ people.name }} de sobrenome {{ people.sobrenome }}</p>
+  </article>
+</section>

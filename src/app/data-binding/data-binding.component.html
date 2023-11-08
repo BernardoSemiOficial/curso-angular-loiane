@@ -63,14 +63,14 @@
   </article>
 </section>
 
-<section class="event-binding">
+<section class="event-binding" style="display: none">
   <h2>Event Binding</h2>
 
   <button class="btn btn-primary" (click)="handleClickButton($event)">
     Me clique!
   </button>
 
-  <div class="p-2">
+  <article class="p-2">
     <input
       type="text"
       (keyup)="handleKeyUpText(inputText.value)"
@@ -80,9 +80,9 @@
     />
     <p>Valor atual: {{ inputValue }}</p>
     <p>Valor salvo: {{ inputValueSave }}</p>
-  </div>
+  </article>
 
-  <div class="p2">
+  <article class="p2">
     <p
       (mouseover)="handleMouseOverText()"
       (mouseout)="handleMouseOverText()"
@@ -90,5 +90,16 @@
     >
       Meu nome é Bernardo Pereira Oliveira
     </p>
-  </div>
+  </article>
+</section>
+
+<app-forms></app-forms>
+
+<section>
+  <h2>Input Properties</h2>
+
+  <section>
+    <app-card [pokemon]="pokemon"></app-card>
+    <app-card [pokemon]="pokemon2"></app-card>
+  </section>
 </section>

@@ -14,6 +14,16 @@ export class DataBindingComponent {
   inputValueSave = '';
   mouseOverText = false;
 
+  pokemon = {
+    nome: 'Picachu',
+    tipo: 'Elétrico',
+  };
+
+  pokemon2 = {
+    nome: 'Charmander',
+    tipo: 'Fogo',
+  };
+
   getValue() {
     return 1;
   }
