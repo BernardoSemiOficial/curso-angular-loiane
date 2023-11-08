@@ -13,6 +13,12 @@ export class DataBindingComponent {
   inputValue = '';
   inputValueSave = '';
   mouseOverText = false;
+  contadorValue = 10;
+
+  contadorContext = {
+    contadorValue: 0,
+    lastAction: '',
+  };
 
   pokemon = {
     nome: 'Picachu',
@@ -48,5 +54,12 @@ export class DataBindingComponent {
 
   handleMouseOverText() {
     this.mouseOverText = !this.mouseOverText;
+  }
+
+  handleContadorContext(data: {
+    contadorValue: number;
+    lastAction: 'increment' | 'decrement';
+  }) {
+    this.contadorContext = data;
   }
 }

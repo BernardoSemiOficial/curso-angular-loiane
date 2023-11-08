@@ -93,13 +93,30 @@
   </article>
 </section>
 
-<app-forms></app-forms>
+<app-forms style="display: none"></app-forms>
 
-<section>
+<section style="display: none">
   <h2>Input Properties</h2>
 
   <section>
     <app-card [pokemon]="pokemon"></app-card>
     <app-card [pokemon]="pokemon2"></app-card>
+  </section>
+</section>
+
+<section>
+  <h2>Output Properties</h2>
+
+  <section>
+    <app-contador
+      [contadorValue]="contadorValue"
+      (contadorContext)="handleContadorContext($event)"
+    ></app-contador>
+    <p>
+      Contador: {{ contadorContext.contadorValue }} | Última ação:
+      {{
+        contadorContext.lastAction == "increment" ? "Incremento" : "Decremento"
+      }}
+    </p>
   </section>
 </section>
