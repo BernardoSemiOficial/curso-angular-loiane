@@ -1,0 +1,94 @@
+<section class="property-binding" style="display: none">
+  <h2>Data Binding</h2>
+
+  <article>
+    <p>Bernardo Pereira {{ lastName }}</p>
+    <p>Soma 1 + 1: {{ 1 + 1 }}</p>
+    <p>Meu aniversário é no dia: {{ getValue() }}</p>
+    <p>Estou aprendendo Angular? {{ isStudy && getBoolean() && "Sim" }}</p>
+  </article>
+
+  <article>
+    <img src="{{ imageUrl }}" alt="" />
+    <img [src]="imageUrl" alt="" />
+    <img bind-src="imageUrl" alt="" />
+  </article>
+
+  <article>
+    <h3>Class e Style Binding</h3>
+    <select #selectClass (change)="(0)">
+      <option value="alert-success">Sucesso</option>
+      <option value="alert-danger">Error</option>
+      <option value="alert-warning">Alerta</option>
+      <option value="alert-info">Info</option>
+    </select>
+    <div class="alert {{ selectClass.value }}" role="alert">
+      A simple success alert—check it out!
+    </div>
+    <div
+      class="alert"
+      [class.alert-success]="selectClass.value == 'alert-success'"
+      role="alert"
+    >
+      A simple success alert—check it out!
+    </div>
+    <div
+      class="alert"
+      [class.alert-danger]="selectClass.value == 'alert-danger'"
+      role="alert"
+    >
+      A simple danger alert—check it out!
+    </div>
+    <div
+      class="alert"
+      [class.alert-warning]="selectClass.value == 'alert-warning'"
+      role="alert"
+    >
+      A simple warning alert—check it out!
+    </div>
+    <div
+      class="alert"
+      [class.alert-info]="selectClass.value == 'alert-info'"
+      role="alert"
+    >
+      A simple info alert—check it out!
+    </div>
+    <div
+      class="alert alert-info"
+      [style.display]="selectClass.value == 'alert-info' ? 'block' : 'none'"
+      role="alert"
+    >
+      A simple info alert—check it out!
+    </div>
+  </article>
+</section>
+
+<section class="event-binding">
+  <h2>Event Binding</h2>
+
+  <button class="btn btn-primary" (click)="handleClickButton($event)">
+    Me clique!
+  </button>
+
+  <div class="p-2">
+    <input
+      type="text"
+      (keyup)="handleKeyUpText(inputText.value)"
+      (keyup.enter)="handleKeyUpTextSave()"
+      (blur)="handleKeyUpTextSave()"
+      #inputText
+    />
+    <p>Valor atual: {{ inputValue }}</p>
+    <p>Valor salvo: {{ inputValueSave }}</p>
+  </div>
+
+  <div class="p2">
+    <p
+      (mouseover)="handleMouseOverText()"
+      (mouseout)="handleMouseOverText()"
+      [class.markdown]="mouseOverText"
+    >
+      Meu nome é Bernardo Pereira Oliveira
+    </p>
+  </div>
+</section>
