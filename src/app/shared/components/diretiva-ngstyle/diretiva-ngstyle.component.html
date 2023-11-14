@@ -1,0 +1,27 @@
+<section class="container p-2">
+  <h2>[ngStyle]</h2>
+
+  <button
+    [style.color]="isActive ? 'red' : 'pink'"
+    [style.backgroundColor]="isActive ? 'white' : 'black'"
+    [style.fontWeight]="isActive ? 'bold' : 'normal'"
+    [style.fontSize]="styleFontSize + 'px'"
+    (click)="handleClickButton()"
+  >
+    Mudar estilo do botão
+  </button>
+  <br />
+  <button
+    [ngStyle]="{
+      color: isActive ? 'red' : 'pink',
+      backgroundColor: isActive ? 'white' : 'black',
+      fontWeight: isActive ? 'bold' : 'normal',
+      fontSize: styleFontSize + 'px'
+    }"
+    (click)="handleClickButton()"
+  >
+    Mudar estilo do botão
+  </button>
+  <br />
+  <input class="input" type="text" [(ngModel)]="styleFontSize" />
+</section>
