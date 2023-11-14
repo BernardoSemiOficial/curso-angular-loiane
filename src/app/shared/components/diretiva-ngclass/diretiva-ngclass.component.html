@@ -1,0 +1,19 @@
+<section class="container">
+  <h2>*ngClass</h2>
+  <br />
+  <i
+    class="fs-2 bi"
+    [class.bi-star]="!isFavorite"
+    [class.bi-star-fill]="isFavorite"
+    (click)="handleClickFavorite()"
+  ></i>
+  <br />
+  <i
+    class="fs-2 bi"
+    [ngClass]="{
+      'bi-star': !isFavorite,
+      'bi-star-fill': isFavorite
+    }"
+    (click)="handleClickFavorite()"
+  ></i>
+</section>
