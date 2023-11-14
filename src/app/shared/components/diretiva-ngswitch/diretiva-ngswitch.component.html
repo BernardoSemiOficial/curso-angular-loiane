@@ -41,3 +41,11 @@
   <p *ngSwitchCase="'pricing'">pricing</p>
   <p *ngSwitchCase>página não encontrada</p>
 </div>
+
+<div class="container" [ngSwitch]="viewActive">
+  <ng-template [ngSwitchCase]="'home'" [ngSwitchDefault]
+    ><p>Home</p></ng-template
+  >
+  <ng-template [ngSwitchCase]="'pricing'"><p>pricing</p></ng-template>
+  <ng-template [ngSwitchCase]="'features'"><p>features</p></ng-template>
+</div>

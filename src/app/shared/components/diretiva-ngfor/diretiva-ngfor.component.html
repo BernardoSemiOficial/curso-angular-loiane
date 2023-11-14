@@ -6,4 +6,10 @@
       {{ i + 1 }}: {{ curso }}
     </li>
   </ul>
+
+  <ul>
+    <ng-template ngFor [ngForOf]="cursos" let-curso let-i="index">
+      <li>{{ i + 1 }}: {{ curso }}</li>
+    </ng-template>
+  </ul>
 </section>
