@@ -11,6 +11,12 @@
     Mudar estilo do botão
   </button>
   <br />
+
+  <br />
+  <input class="input" type="text" [(ngModel)]="styleFontSize" />
+
+  <br />
+  <h5>Styles com diretiva ngStyle</h5>
   <button
     [ngStyle]="{
       color: isActive ? 'red' : 'pink',
@@ -22,6 +28,4 @@
   >
     Mudar estilo do botão
   </button>
-  <br />
-  <input class="input" type="text" [(ngModel)]="styleFontSize" />
 </section>

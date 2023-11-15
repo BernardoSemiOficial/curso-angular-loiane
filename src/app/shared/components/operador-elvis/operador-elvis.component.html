@@ -1,0 +1,10 @@
+<section>
+  <h2>Operador elvis (?)</h2>
+
+  <p>Titulo: {{ tarefa.titulo }}</p>
+  <p>Descrição {{ tarefa.descricao }}:</p>
+  <p>
+    Nome: {{ tarefa?.usuario?.primeiroNome }} {{ tarefa?.usuario?.segundoNome }}
+  </p>
+  <p>Endereço - CEP: {{ tarefa?.usuario?.endereco?.cep }}</p>
+</section>
