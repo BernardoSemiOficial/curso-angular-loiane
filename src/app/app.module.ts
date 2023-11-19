@@ -16,6 +16,7 @@ import { OperadorElvisComponent } from './shared/components/operador-elvis/opera
 import { FundoAmareloDirective } from './shared/directives/fundo-amarelo/fundo-amarelo.directive';
 import { HighlightMouseDirective } from './shared/directives/highlight-mouse/highlight-mouse.directive';
 import { HighlightDirective } from './shared/directives/highlight/highlight.directive';
+import { NgelseDirective } from './shared/directives/ngelse/ngelse.directive';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { HighlightDirective } from './shared/directives/highlight/highlight.dire
     HighlightMouseDirective,
     DiretivaCustomizadasComponent,
     HighlightDirective,
+    NgelseDirective,
   ],
   imports: [BrowserModule, AppRoutingModule, NgbModule, FormsModule],
   providers: [],

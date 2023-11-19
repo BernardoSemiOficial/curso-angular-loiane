@@ -18,3 +18,28 @@
     Texto com fundo customizado ao passar mouse por cima
   </p>
 </section>
+
+<br />
+<br />
+
+<section>
+  <h2>Diretiva ngElse</h2>
+
+  <button (click)="isVisibleCursos = !isVisibleCursos">
+    Exibir cursos disponíveis?
+  </button>
+  <br />
+  <article *ngIf="isVisibleCursos">
+    <p>Lista de cursos disponíveis:</p>
+    <ul *ngIf="cursos.length">
+      <li *ngFor="let curso of cursos">{{ curso }}</li>
+    </ul>
+    <div *ngElse="cursos.length > 0">
+      <p>Lista vazia...</p>
+    </div>
+    <ng-template [ngElse]="cursos.length > 0">
+      <p>Lista vazia...</p>
+    </ng-template>
+    <button (click)="cursos.length = 0">Excluir todos os cursos</button>
+  </article>
+</section>
