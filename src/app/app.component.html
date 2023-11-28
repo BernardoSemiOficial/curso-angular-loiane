@@ -1,4 +1,9 @@
-<app-header></app-header>
+<app-header [cursoId]="cursoId"></app-header>
 <section class="container">
+  <br />
+  <div>
+    <label for="">Id: </label>
+    <input type="text" [(ngModel)]="cursoId" />
+  </div>
   <router-outlet></router-outlet>
 </section>
