@@ -3,14 +3,14 @@
     <a routerLink="" class="brand-logo right">Angular</a>
     <ul id="nav-mobile" class="left hide-on-med-and-down">
       <li routerLinkActive="active"><a routerLink="/login">Login</a></li>
-      <li routerLinkActive="active"><a routerLink="/cursos">Cursos</a></li>
+      <li routerLinkActive="active">
+        <a routerLink="/cursos" [queryParams]="{ currentPage: 1 }">Cursos</a>
+      </li>
       <li routerLinkActive="active">
         <a [routerLink]="['curso', cursoId]">Curso com id</a>
       </li>
       <li routerLinkActive="active">
-        <a [routerLink]="['curso-params', { id: cursoId || '' }]"
-          >Curso com id</a
-        >
+        <a [routerLink]="['alunos']">Alunos</a>
       </li>
     </ul>
   </div>

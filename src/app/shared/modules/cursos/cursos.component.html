@@ -1,7 +1,7 @@
 <section>
   Lista de cursos:
   <br />
-
+  <strong>Página: {{ currentPage }}</strong>
   <div class="collection">
     <a
       *ngFor="let curso of cursos"
@@ -10,4 +10,5 @@
       >{{ curso.name }}</a
     >
   </div>
+  <button (click)="handleClickNextPage()">Próxima página</button>
 </section>
