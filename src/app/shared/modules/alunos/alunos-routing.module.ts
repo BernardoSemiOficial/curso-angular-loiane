@@ -5,10 +5,15 @@ import { AlunoDetalheComponent } from './components/aluno-detalhe/aluno-detalhe.
 import { AlunoFormComponent } from './components/aluno-form/aluno-form.component';
 
 const routes: Routes = [
-  { path: 'alunos', component: AlunosComponent },
-  { path: 'alunos/novo', component: AlunoFormComponent },
-  { path: 'alunos/:id', component: AlunoDetalheComponent },
-  { path: 'alunos/:id/editar', component: AlunoFormComponent },
+  {
+    path: 'alunos',
+    component: AlunosComponent,
+    children: [
+      { path: 'novo', component: AlunoFormComponent },
+      { path: ':id', component: AlunoDetalheComponent },
+      { path: ':id/editar', component: AlunoFormComponent },
+    ],
+  },
 ];
 
 @NgModule({
