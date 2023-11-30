@@ -6,6 +6,20 @@ import { LoginComponent } from './shared/components/login/login.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
+  {
+    path: 'alunos',
+    loadChildren: () =>
+      import('./shared/modules/alunos/alunos.module').then(
+        (m) => m.AlunosModule
+      ),
+  },
+  {
+    path: 'cursos',
+    loadChildren: () =>
+      import('./shared/modules/cursos/cursos.module').then(
+        (m) => m.CursosModule
+      ),
+  },
 ];
 
 @NgModule({

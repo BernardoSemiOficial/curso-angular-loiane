@@ -7,18 +7,10 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { HomeComponent } from './shared/components/home/home.component';
 import { LoginComponent } from './shared/components/login/login.component';
-import { AlunosModule } from './shared/modules/alunos/alunos.module';
-import { CursosModule } from './shared/modules/cursos/cursos.module';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HomeComponent, HeaderComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    CursosModule,
-    AlunosModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

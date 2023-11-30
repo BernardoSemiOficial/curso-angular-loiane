@@ -1,1 +1,11 @@
-<p>aluno-detalhe works!</p>
+<section>
+  <h3>Aluno:</h3>
+
+  <p>Id: {{ aluno?.id }}</p>
+  <p>Name: {{ aluno?.name }}</p>
+  <p>Email: {{ aluno?.email }}</p>
+
+  <button class="waves-effect waves-light btn" (click)="goToPageEdit()">
+    editar
+  </button>
+</section>
