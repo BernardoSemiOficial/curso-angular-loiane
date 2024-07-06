@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { HomeComponent } from './shared/components/home/home.component';
 import { LoginComponent } from './shared/components/login/login.component';
+import { AuthGuard } from './shared/guards/auth.guard';
+import { AuthService } from './shared/services/auth/auth.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, HomeComponent, HeaderComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

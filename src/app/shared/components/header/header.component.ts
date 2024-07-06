@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { AuthService } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +8,10 @@ import { Component, Input } from '@angular/core';
 })
 export class HeaderComponent {
   @Input() cursoId!: string;
+
+  constructor(private authService: AuthService) {}
+
+  handleClickLogout() {
+    this.authService.logout();
+  }
 }

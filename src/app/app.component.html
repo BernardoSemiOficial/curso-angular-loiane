@@ -1,9 +1,5 @@
-<app-header [cursoId]="cursoId"></app-header>
+<app-header *ngIf="user" [cursoId]="cursoId"></app-header>
+{{ user | json }}
 <section class="container">
-  <br />
-  <div>
-    <label for="">Id: </label>
-    <input type="text" [(ngModel)]="cursoId" />
-  </div>
   <router-outlet></router-outlet>
 </section>
