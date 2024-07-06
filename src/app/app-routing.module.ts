@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './shared/components/home/home.component';
 import { LoginComponent } from './shared/components/login/login.component';
 import { AuthGuard } from './shared/guards/auth.guard';
+import { CursosGuard } from './shared/guards/cursos.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -18,6 +19,7 @@ const routes: Routes = [
   {
     path: 'cursos',
     canActivate: [AuthGuard],
+    canActivateChild: [CursosGuard],
     loadChildren: () =>
       import('./shared/modules/cursos/cursos.module').then(
         (m) => m.CursosModule
