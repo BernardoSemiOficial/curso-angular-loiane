@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AlunosDeactiveGuard } from '../../guards/alunos-deactive.guard';
 import { AlunosGuard } from '../../guards/alunos.guard';
 import { AlunosRoutingModule } from './alunos-routing.module';
 import { AlunosComponent } from './alunos.component';
@@ -10,6 +11,6 @@ import { AlunoFormComponent } from './components/aluno-form/aluno-form.component
 @NgModule({
   declarations: [AlunosComponent, AlunoDetalheComponent, AlunoFormComponent],
   imports: [CommonModule, FormsModule, AlunosRoutingModule],
-  providers: [AlunosGuard],
+  providers: [AlunosGuard, AlunosDeactiveGuard],
 })
 export class AlunosModule {}
