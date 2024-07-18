@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Alunos } from '../../models/alunos.models';
-import { AlunosService } from '../../services/alunos.service';
+import { Aluno } from '../../models/alunos.models';
 
 @Component({
   selector: 'app-aluno-detalhe',
@@ -11,20 +10,21 @@ import { AlunosService } from '../../services/alunos.service';
 })
 export class AlunoDetalheComponent implements OnInit {
   alunoId!: number;
-  aluno!: Alunos | null;
+  aluno!: Aluno | null;
   subscriptionRoute!: Subscription;
 
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router,
-    private alunosService: AlunosService
-  ) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.subscriptionRoute = this.route.paramMap.subscribe((params) => {
-      const id = params.get('id');
-      this.alunoId = Number(id);
-      this.aluno = this.alunosService.getAluno(this.alunoId) ?? null;
+    // this.subscriptionRoute = this.route.paramMap.subscribe((params) => {
+    //   const id = params.get('id');
+    //   this.alunoId = Number(id);
+    //   this.aluno = this.alunosService.getAluno(this.alunoId) ?? null;
+    // });
+
+    this.route.data.subscribe((data: Data) => {
+      const { aluno } = data as { aluno: Aluno };
+      this.aluno = aluno;
     });
   }
 

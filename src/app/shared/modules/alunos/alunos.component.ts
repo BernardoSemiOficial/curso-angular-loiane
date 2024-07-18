@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Alunos } from './models/alunos.models';
+import { Aluno } from './models/alunos.models';
 import { AlunosService } from './services/alunos.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { AlunosService } from './services/alunos.service';
   styleUrls: ['./alunos.component.scss'],
 })
 export class AlunosComponent {
-  alunos: Alunos[] = [];
+  alunos: Aluno[] = [];
 
   constructor(private alunosService: AlunosService) {}
 

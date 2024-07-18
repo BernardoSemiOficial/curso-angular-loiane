@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormDeactivate } from 'src/app/shared/interfaces/form-deactivate';
-import { Alunos } from '../../models/alunos.models';
+import { Aluno } from '../../models/alunos.models';
 import { AlunosService } from '../../services/alunos.service';
 
 @Component({
@@ -12,8 +12,8 @@ import { AlunosService } from '../../services/alunos.service';
 })
 export class AlunoFormComponent implements OnInit, FormDeactivate {
   alunoId!: number;
-  aluno: Alunos = { id: 0, name: '', email: '' };
-  alunoFormularioInicial: Alunos = { id: 0, name: '', email: '' };
+  aluno: Aluno = { id: 0, name: '', email: '' };
+  alunoFormularioInicial: Aluno = { id: 0, name: '', email: '' };
   subscriptionRoute!: Subscription;
 
   constructor(
