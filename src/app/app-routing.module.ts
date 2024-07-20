@@ -11,6 +11,7 @@ const routes: Routes = [
   {
     path: 'alunos',
     canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
     loadChildren: () =>
       import('./shared/modules/alunos/alunos.module').then(
         (m) => m.AlunosModule
@@ -18,6 +19,7 @@ const routes: Routes = [
   },
   {
     path: 'cursos',
+    canLoad: [AuthGuard],
     canActivate: [AuthGuard],
     canActivateChild: [CursosGuard],
     loadChildren: () =>
