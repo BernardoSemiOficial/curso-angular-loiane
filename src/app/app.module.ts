@@ -10,9 +10,10 @@ import { LoginComponent } from './shared/components/login/login.component';
 import { AuthGuard } from './shared/guards/auth.guard';
 import { CursosGuard } from './shared/guards/cursos.guard';
 import { AuthService } from './shared/services/auth/auth.service';
+import { PaginaNaoEncontradaComponent } from './shared/components/pagina-nao-encontrada/pagina-nao-encontrada.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, HeaderComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, HeaderComponent, PaginaNaoEncontradaComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [AuthService, AuthGuard, CursosGuard],
   bootstrap: [AppComponent],
