@@ -1,0 +1,33 @@
+<section>
+  <h2>Exemplos de Pipes</h2>
+
+  <p>
+    Título:
+    {{
+      livro.titulo
+        | uppercase
+        | lowercase
+        | camelCase : "parâmetro A" : "parâmetro B" : "parâmetro C"
+    }}
+  </p>
+  <p>Estrelas: {{ livro.rating | number : "1.2-2" }}</p>
+  <p>Páginas: {{ livro.numeroPaginas | number }}</p>
+  <p>Preço: {{ livro.preco | currency : "BRL" : "symbol" : "1.1-2" }}</p>
+  <p>Data Lançamento: {{ livro.dataLancamento | date : "d/M/yyyy" }}</p>
+  <p>Url: {{ livro.url }}</p>
+
+  <br />
+  <p>Livro: {{ livro | json }}</p>
+
+  <input type="text" [(ngModel)]="wordMatch" placeholder="Filtrar a lista" />
+  <br />
+  <input type="text" #inputNewCurso />
+  <button (click)="addCurso(inputNewCurso.value)">Add curso</button>
+
+  <ul>
+    Livros disponíveis:
+    <li *ngFor="let liv of livros | filtroArray : wordMatch">
+      {{ liv }}
+    </li>
+  </ul>
+</section>
