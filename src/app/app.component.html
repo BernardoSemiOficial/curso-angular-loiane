@@ -1,0 +1,5 @@
+<app-header *ngIf="user" [cursoId]="cursoId"></app-header>
+{{ user | json }}
+<section class="container">
+  <router-outlet></router-outlet>
+</section>

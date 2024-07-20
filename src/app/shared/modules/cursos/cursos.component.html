@@ -1,0 +1,18 @@
+<section>
+  <h3>Lista de cursos:</h3>
+  <br />
+  <strong>Página: {{ currentPage }}</strong>
+  <div class="collection">
+    <a
+      *ngFor="let curso of cursos"
+      class="collection-item"
+      [routerLink]="[curso.id]"
+      >{{ curso.name }}</a
+    >
+  </div>
+  <button class="waves-effect waves-light btn" (click)="handleClickNextPage()">
+    Próxima página
+  </button>
+
+  <router-outlet></router-outlet>
+</section>
