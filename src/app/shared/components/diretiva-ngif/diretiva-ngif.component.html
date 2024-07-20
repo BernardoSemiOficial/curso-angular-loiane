@@ -1,0 +1,41 @@
+<section>
+  <h2>*ngIf</h2>
+
+  <button (click)="isVisibleCursos = !isVisibleCursos">
+    Exibir cursos disponíveis?
+  </button>
+  <br />
+  <article *ngIf="isVisibleCursos">
+    <p>Lista de cursos disponíveis:</p>
+    <ul *ngIf="cursos.length; else elseBlock">
+      <li *ngFor="let curso of cursos">{{ curso }}</li>
+    </ul>
+    <ng-template #elseBlock>
+      <p>Lista vazia...</p>
+    </ng-template>
+    <button (click)="cursos.length = 0">Excluir todos os cursos</button>
+  </article>
+  <ng-template [ngIf]="isVisibleCursos">
+    <article>
+      <p>Lista de cursos disponíveis:</p>
+      <ul *ngIf="cursos.length; else elseBlock">
+        <li *ngFor="let curso of cursos">{{ curso }}</li>
+      </ul>
+      <ng-template #elseBlock>
+        <p>Lista vazia...</p>
+      </ng-template>
+      <button (click)="cursos.length = 0">Excluir todos os cursos</button>
+    </article>
+  </ng-template>
+
+  <br />
+
+  <article>
+    <strong>[hidden]</strong>
+
+    <div [hidden]="!isViewApresentation">Meu nome é Bernardo Pereira</div>
+    <button (click)="isViewApresentation = !isViewApresentation">
+      Esconder apresentação
+    </button>
+  </article>
+</section>

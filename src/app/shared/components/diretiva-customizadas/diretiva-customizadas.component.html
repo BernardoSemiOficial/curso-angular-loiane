@@ -1,0 +1,45 @@
+<section>
+  <h2>Diretivas customizadas</h2>
+
+  <p fundoAmarelo>Texto com fundo amarelo</p>
+
+  <button fundoAmarelo>Botão com fundo amarelo</button>
+</section>
+
+<br />
+<br />
+
+<section>
+  <h2>Diretiva com HostListener e HostBinding</h2>
+
+  <p highlightMouse>Texto com fundo amarelo ao passar mouse por cima</p>
+
+  <p [highlight]="'red'" [defaultColor]="'grey'">
+    Texto com fundo customizado ao passar mouse por cima
+  </p>
+</section>
+
+<br />
+<br />
+
+<section>
+  <h2>Diretiva ngElse</h2>
+
+  <button (click)="isVisibleCursos = !isVisibleCursos">
+    Exibir cursos disponíveis?
+  </button>
+  <br />
+  <article *ngIf="isVisibleCursos">
+    <p>Lista de cursos disponíveis:</p>
+    <ul *ngIf="cursos.length">
+      <li *ngFor="let curso of cursos">{{ curso }}</li>
+    </ul>
+    <div *ngElse="cursos.length > 0">
+      <p>Lista vazia...</p>
+    </div>
+    <ng-template [ngElse]="cursos.length > 0">
+      <p>Lista vazia...</p>
+    </ng-template>
+    <button (click)="cursos.length = 0">Excluir todos os cursos</button>
+  </article>
+</section>
