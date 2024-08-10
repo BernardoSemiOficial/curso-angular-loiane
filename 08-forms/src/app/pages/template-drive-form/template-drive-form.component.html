@@ -59,6 +59,7 @@
             cep
             [ngModel]="usuario.cep"
             #cep="ngModel"
+            (blur)="getAddress(cep.value)"
           />
         </app-form-control-field>
       </div>
