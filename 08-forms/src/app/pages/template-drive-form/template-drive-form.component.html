@@ -1,15 +1,200 @@
-<form>
-  <div class="mb-3">
-    <label for="name" class="form-label">Nome</label>
-    <input type="text" class="form-control" id="name" />
-  </div>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input type="email" class="form-control" id="email" />
-  </div>
-  <!-- <div class="mb-3 form-check">
+<form
+  class="container mt-5"
+  #formTemplateDrive="ngForm"
+  (ngSubmit)="onSubmit(formTemplateDrive)"
+  novalidate
+>
+  <fieldset class="col-sm-12 mb-3">
+    <app-form-control-field
+      fieldName="name"
+      label="Name"
+      feedbackMessage="Name is required."
+      [formControlField]="name"
+    >
+      <input
+        id="name"
+        type="name"
+        name="name"
+        class="form-control"
+        ngModel
+        required
+        #name="ngModel"
+      />
+    </app-form-control-field>
+  </fieldset>
+  <fieldset class="col-sm-12 mb-3">
+    <app-form-control-field
+      fieldName="email"
+      label="Email"
+      feedbackMessage="Email is required."
+      [formControlField]="email"
+    >
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        required
+        email
+        [ngModel]="usuario.email"
+        #email="ngModel"
+      />
+    </app-form-control-field>
+  </fieldset>
+  <ng-container ngModelGroup="endereco">
+    <fieldset class="row">
+      <div class="col-sm-3 mb-3">
+        <app-form-control-field
+          fieldName="cep"
+          label="CEP"
+          feedbackMessage="CEP is required."
+          [formControlField]="cep"
+        >
+          <input
+            type="cep"
+            class="form-control"
+            id="cep"
+            name="cep"
+            required
+            cep
+            [ngModel]="usuario.cep"
+            #cep="ngModel"
+          />
+        </app-form-control-field>
+      </div>
+      <div class="col-sm-3 mb-3">
+        <app-form-control-field
+          fieldName="number"
+          label="Number"
+          feedbackMessage="Number is required."
+          [formControlField]="number"
+        >
+          <input
+            type="number"
+            class="form-control"
+            id="number"
+            name="number"
+            required
+            number
+            [ngModel]="usuario.number"
+            #number="ngModel"
+          />
+        </app-form-control-field>
+      </div>
+      <div class="col-sm-6 mb-3">
+        <app-form-control-field
+          fieldName="complement"
+          label="Complement"
+          feedbackMessage="Complement is required."
+          [formControlField]="complement"
+        >
+          <input
+            type="complement"
+            class="form-control"
+            id="complement"
+            name="complement"
+            required
+            complement
+            [ngModel]="usuario.complement"
+            #complement="ngModel"
+          />
+        </app-form-control-field>
+      </div>
+    </fieldset>
+    <fieldset class="col-sm-12 mb-3">
+      <app-form-control-field
+        fieldName="street"
+        label="Street"
+        feedbackMessage="Street is required."
+        [formControlField]="street"
+      >
+        <input
+          type="street"
+          class="form-control"
+          id="street"
+          name="street"
+          required
+          street
+          [ngModel]="usuario.street"
+          #street="ngModel"
+        />
+      </app-form-control-field>
+    </fieldset>
+    <fieldset class="row">
+      <div class="col-sm-5 mb-3">
+        <app-form-control-field
+          fieldName="district"
+          label="District"
+          feedbackMessage="District is required."
+          [formControlField]="district"
+        >
+          <input
+            type="district"
+            class="form-control"
+            id="district"
+            name="district"
+            required
+            district
+            [ngModel]="usuario.district"
+            #district="ngModel"
+          />
+        </app-form-control-field>
+      </div>
+      <div class="col-sm-4 mb-3">
+        <app-form-control-field
+          fieldName="city"
+          label="City"
+          feedbackMessage="City is required."
+          [formControlField]="city"
+        >
+          <input
+            type="city"
+            class="form-control"
+            id="city"
+            name="city"
+            required
+            city
+            [ngModel]="usuario.city"
+            #city="ngModel"
+          />
+        </app-form-control-field>
+      </div>
+      <div class="col-sm-3 mb-3">
+        <app-form-control-field
+          fieldName="state"
+          label="State"
+          feedbackMessage="State is required."
+          [formControlField]="state"
+        >
+          <input
+            type="state"
+            class="form-control"
+            id="state"
+            name="state"
+            required
+            state
+            [ngModel]="usuario.state"
+            #state="ngModel"
+          />
+        </app-form-control-field>
+      </div>
+    </fieldset>
+  </ng-container>
+
+  <pre>
+    {{ formTemplateDrive.value | json }}
+  </pre>
+
+  <button
+    [disabled]="!formTemplateDrive.valid"
+    type="submit"
+    class="btn btn-primary"
+  >
+    Submit
+  </button>
+</form>
+
+<!-- <div class="mb-3 form-check">
     <input type="checkbox" class="form-check-input" id="exampleCheck1" />
     <label class="form-check-label" for="exampleCheck1">Check me out</label>
   </div> -->
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
