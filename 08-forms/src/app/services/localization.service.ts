@@ -1,5 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+
+export type LocalizationBrazil = {
+  cep: string;
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
+};
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +17,9 @@ import { inject, Injectable } from '@angular/core';
 export class LocalizationService {
   private http: HttpClient = inject(HttpClient);
 
-  getAddressInfo(cep: string) {
-    return this.http.get(`https://viacep.com.br/ws/${cep}/json/`);
+  getAddressInfo(cep: string): Observable<LocalizationBrazil> {
+    return this.http.get<LocalizationBrazil>(
+      `https://viacep.com.br/ws/${cep}/json/`
+    );
   }
 }

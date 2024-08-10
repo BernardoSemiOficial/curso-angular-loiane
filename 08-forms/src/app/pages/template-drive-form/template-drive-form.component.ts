@@ -1,8 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { FormControlFieldComponent } from '../../components/form-control-field/form-control-field.component';
-import { LocalizationService } from '../../services/localization.service';
+import {
+  LocalizationBrazil,
+  LocalizationService,
+} from '../../services/localization.service';
 
 @Component({
   selector: 'app-template-drive-form',
@@ -14,6 +18,9 @@ import { LocalizationService } from '../../services/localization.service';
 export class TemplateDriveFormComponent {
   private localizationService: LocalizationService =
     inject(LocalizationService);
+  private http: HttpClient = inject(HttpClient);
+
+  @ViewChild('formTemplateDrive') form!: NgForm;
 
   usuario: any = {
     name: '',
@@ -24,6 +31,15 @@ export class TemplateDriveFormComponent {
     console.log(form);
     console.log('You submitted value:', form.value);
     console.log('You submitted value:', this.usuario);
+
+    this.http.post('https://httpbin.org/post', form.value).subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 
   getAddress(cep: string) {
@@ -39,10 +55,27 @@ export class TemplateDriveFormComponent {
     this.localizationService.getAddressInfo(cepCleaded).subscribe({
       next: (data) => {
         console.log(data);
+        this.populateFields(data);
       },
       error: (error) => {
         console.log(error);
       },
     });
+  }
+
+  populateFields(data: LocalizationBrazil) {
+    this.form.form.patchValue({
+      address: {
+        complement: data.complemento,
+        street: data.logradouro,
+        district: data.bairro,
+        city: data.localidade,
+        state: data.uf,
+      },
+    });
+  }
+
+  resetForm() {
+    this.form.reset();
   }
 }

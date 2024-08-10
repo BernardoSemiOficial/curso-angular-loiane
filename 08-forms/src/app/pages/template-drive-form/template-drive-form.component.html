@@ -41,7 +41,7 @@
       />
     </app-form-control-field>
   </fieldset>
-  <ng-container ngModelGroup="endereco">
+  <ng-container ngModelGroup="address">
     <fieldset class="row">
       <div class="col-sm-3 mb-3">
         <app-form-control-field
@@ -186,10 +186,13 @@
     {{ formTemplateDrive.value | json }}
   </pre>
 
+  <button (click)="resetForm()" type="button" class="btn btn-secondary">
+    Reset
+  </button>
   <button
     [disabled]="!formTemplateDrive.valid"
     type="submit"
-    class="btn btn-primary"
+    class="btn btn-primary ms-1"
   >
     Submit
   </button>
