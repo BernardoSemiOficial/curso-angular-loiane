@@ -2,16 +2,19 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
+  FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { FormControlFieldComponent } from '../../components/form-control-field/form-control-field.component';
+import { FormsValidationService } from '../../services/forms/forms-validation.service';
 import {
   LocalizationBrazil,
   LocalizationService,
-} from '../../services/localization.service';
+} from '../../services/localization/localization.service';
 
 @Component({
   selector: 'app-data-drive-form',
@@ -25,9 +28,13 @@ export class DataDriveFormComponent implements OnInit {
   private localizationService: LocalizationService =
     inject(LocalizationService);
   private http: HttpClient = inject(HttpClient);
+  private formsValidationService: FormsValidationService = inject(
+    FormsValidationService
+  );
   form!: FormGroup;
   states$ = this.localizationService.getStatesBrazil();
   tecnologies: { id: number; nome: string }[] = [];
+  frameworks: string[] = ['Angular', 'React', 'Vue', 'Svelte', 'Ember'];
 
   ngOnInit() {
     // this.form = new FormGroup({
@@ -42,7 +49,9 @@ export class DataDriveFormComponent implements OnInit {
       name: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       tecnologies: [null, Validators.required],
-      newsletter: [false, Validators.required],
+      newsletter: [null, Validators.required],
+      terms: [null, [Validators.required, Validators.requiredTrue]],
+      frameworks: this.buildFrameworks(),
       address: this.formBuilder.group({
         cep: [null, Validators.required],
         number: [null, Validators.required],
@@ -55,6 +64,24 @@ export class DataDriveFormComponent implements OnInit {
     });
 
     this.getTecnologies();
+  }
+
+  get frameworksFormArray(): FormArray<
+    FormGroup<{
+      label: FormControl<string | null>;
+      checked: FormControl<boolean | null>;
+    }>
+  > {
+    return this.form.get('frameworks') as FormArray;
+  }
+
+  buildFrameworks() {
+    const frameworksControls = this.frameworks.map((frame) =>
+      this.formBuilder.group({ label: frame, checked: false })
+    );
+    return this.formBuilder.array(frameworksControls, {
+      validators: [this.formsValidationService.validateMinSelectedCheckbox(2)],
+    });
   }
 
   onSubmit() {

@@ -204,22 +204,65 @@
         [feedbackMessage]="{ required: 'Newsletter is required.' }"
         [formControlField]="form.get('newsletter')"
       >
-        <input
-          type="radio"
-          id="newsletter-yes"
-          [value]="true"
-          formControlName="newsletter"
-          class="mx-2"
-        />Yes
-        <label for="newsletter-no">
+        <div>
           <input
             type="radio"
-            id="newsletter-no"
-            [value]="false"
+            id="newsletter-yes"
+            [value]="true"
             formControlName="newsletter"
             class="mx-2"
-          />No
+          />Yes
+          <label for="newsletter-no">
+            <input
+              type="radio"
+              id="newsletter-no"
+              [value]="false"
+              formControlName="newsletter"
+              class="mx-2"
+            />No
+          </label>
+        </div>
+      </app-form-control-field>
+    </div>
+    <div class="col-sm-3 mb-3">
+      <app-form-control-field
+        fieldName="terms"
+        label="Terms"
+        [feedbackMessage]="{ required: 'Terms is required.' }"
+        [formControlField]="form.get('terms')"
+      >
+        <div>
+          <input
+            type="checkbox"
+            id="terms"
+            formControlName="terms"
+            class="mx-2"
+          />Accept terms
+        </div>
+      </app-form-control-field>
+    </div>
+    <div class="col-sm-3 mb-3" formArrayName="frameworks">
+      <app-form-control-field
+        fieldName="frameworks"
+        label="Frameworks"
+        [feedbackMessage]="{
+          required: 'Frameworks is required.',
+          minLength: 'Select at least two framework.'
+        }"
+        [formControlField]="form.get('frameworks')"
+      >
+        @for (framework of frameworksFormArray.controls; track framework; let
+        idx = $index) {
+        <label class="d-block" [formGroup]="framework">
+          <input
+            type="checkbox"
+            [id]="framework.value.label"
+            class="mx-2"
+            formControlName="checked"
+          />
+          {{ framework.value.label }}
         </label>
+        }
       </app-form-control-field>
     </div>
   </fieldset>

@@ -16,5 +16,6 @@ export class FormControlFieldComponent {
   @Input() feedbackMessage: { [key: string]: string } = {
     required: 'This field is required',
     email: 'This field is with email invalid',
+    minLength: 'This field is with less characters than expected',
   };
 }

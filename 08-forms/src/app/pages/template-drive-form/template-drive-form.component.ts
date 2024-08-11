@@ -6,7 +6,7 @@ import { FormControlFieldComponent } from '../../components/form-control-field/f
 import {
   LocalizationBrazil,
   LocalizationService,
-} from '../../services/localization.service';
+} from '../../services/localization/localization.service';
 
 @Component({
   selector: 'app-template-drive-form',
