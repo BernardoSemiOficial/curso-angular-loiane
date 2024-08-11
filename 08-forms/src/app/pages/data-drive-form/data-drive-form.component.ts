@@ -8,6 +8,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { FormControlFieldComponent } from '../../components/form-control-field/form-control-field.component';
+import {
+  LocalizationBrazil,
+  LocalizationService,
+} from '../../services/localization.service';
 
 @Component({
   selector: 'app-data-drive-form',
@@ -18,6 +22,8 @@ import { FormControlFieldComponent } from '../../components/form-control-field/f
 })
 export class DataDriveFormComponent implements OnInit {
   private formBuilder: FormBuilder = inject(FormBuilder);
+  private localizationService: LocalizationService =
+    inject(LocalizationService);
   private http: HttpClient = inject(HttpClient);
   form!: FormGroup;
 
@@ -40,13 +46,19 @@ export class DataDriveFormComponent implements OnInit {
         street: [{ value: null, disabled: true }, Validators.required],
         district: [{ value: null, disabled: true }, Validators.required],
         city: [{ value: null, disabled: true }, Validators.required],
-        state: [{ value: null, disabled: true }, [Validators.required]],
+        state: [null, [Validators.required]],
       }),
     });
+
+    this.getStates();
   }
 
   onSubmit() {
     console.log(this.form);
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
 
     this.http.post('https://httpbin.org/post', this.form.value).subscribe({
       next: (data) => {
@@ -61,5 +73,49 @@ export class DataDriveFormComponent implements OnInit {
 
   resetForm() {
     this.form.reset();
+  }
+
+  getAddress() {
+    const cep = this.form.get('address.cep')?.value;
+    console.log(cep);
+    if (!cep) return;
+
+    const cepCleaded = cep.replace(/\D/g, '');
+    const cepValidRegex = /^\d{8}$/;
+    const isCepValid = cepValidRegex.test(cepCleaded);
+
+    if (!isCepValid) console.log('CEP invalid');
+
+    this.localizationService.getAddressInfo(cepCleaded).subscribe({
+      next: (data) => {
+        console.log(data);
+        this.populateFields(data);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+  getStates() {
+    this.localizationService.getStatesBrazil().subscribe({
+      next: (data) => {
+        console.log(data);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
+  populateFields(data: LocalizationBrazil) {
+    this.form.patchValue({
+      address: {
+        complement: data.complemento,
+        street: data.logradouro,
+        district: data.bairro,
+        city: data.localidade,
+        state: data.uf,
+      },
+    });
   }
 }

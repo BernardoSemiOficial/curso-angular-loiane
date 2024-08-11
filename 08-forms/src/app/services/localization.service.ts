@@ -11,6 +11,12 @@ export type LocalizationBrazil = {
   uf: string;
 };
 
+export type StateBrazil = {
+  id: number;
+  sigla: string;
+  nome: string;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -21,5 +27,9 @@ export class LocalizationService {
     return this.http.get<LocalizationBrazil>(
       `https://viacep.com.br/ws/${cep}/json/`
     );
+  }
+
+  getStatesBrazil(): Observable<StateBrazil[]> {
+    return this.http.get<StateBrazil[]>('assets/states/brazil.json');
   }
 }
