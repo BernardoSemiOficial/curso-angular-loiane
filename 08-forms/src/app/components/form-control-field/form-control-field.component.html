@@ -9,12 +9,18 @@
 <div class="alert alert-warning" role="alert">
   {{ feedbackMessage["required"] }}
 </div>
-} @if(formControlField?.errors?.['email'] && formControlField?.touched) {
+} @else if (formControlField?.errors?.['email'] && formControlField?.touched) {
 <div class="alert alert-warning" role="alert">
   {{ feedbackMessage["email"] }}
 </div>
-} @if(formControlField?.errors?.['minLength'] && formControlField?.touched) {
+} @else if (formControlField?.errors?.['minLength'] &&
+formControlField?.touched) {
 <div class="alert alert-warning" role="alert">
   {{ feedbackMessage["minLength"] }}
+</div>
+} @else if (formControlField?.errors?.['invalid'] && formControlField?.touched)
+{
+<div class="alert alert-warning" role="alert">
+  {{ feedbackMessage["invalid"] }}
 </div>
 }

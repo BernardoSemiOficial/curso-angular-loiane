@@ -45,7 +45,10 @@
         <app-form-control-field
           fieldName="cep"
           label="CEP"
-          [feedbackMessage]="{ required: 'CEP is required.' }"
+          [feedbackMessage]="{
+            required: 'CEP is required.',
+            invalid: 'CEP is invalid'
+          }"
           [formControlField]="form.get('address.cep')"
         >
           <input

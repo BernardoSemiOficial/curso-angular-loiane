@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 export type LocalizationBrazil = {
   cep: string;
@@ -34,17 +34,11 @@ export class LocalizationService {
   }
 
   validateAndGetAddress(cep: string): Observable<LocalizationBrazil> {
-    if (!cep) {
-      throw new Error('CEP is required');
-    }
+    if (!cep) return of({} as LocalizationBrazil);
     const cepCleaded = cep.replace(/\D/g, '');
     const cepValidRegex = /^\d{8}$/;
     const isCepValid = cepValidRegex.test(cepCleaded);
-
-    if (!isCepValid) {
-      throw new Error('CEP invalid');
-    }
-
+    if (!isCepValid) return of({} as LocalizationBrazil);
     return this.getAddressInfo(cepCleaded);
   }
 }

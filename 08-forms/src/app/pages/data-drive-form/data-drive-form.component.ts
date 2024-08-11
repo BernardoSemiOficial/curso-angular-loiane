@@ -53,7 +53,10 @@ export class DataDriveFormComponent implements OnInit {
       terms: [null, [Validators.required, Validators.requiredTrue]],
       frameworks: this.buildFrameworks(),
       address: this.formBuilder.group({
-        cep: [null, Validators.required],
+        cep: [
+          null,
+          [Validators.required, this.formsValidationService.validateCep],
+        ],
         number: [null, Validators.required],
         complement: [null],
         street: [null, Validators.required],

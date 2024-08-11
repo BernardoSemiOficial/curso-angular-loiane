@@ -17,5 +17,6 @@ export class FormControlFieldComponent {
     required: 'This field is required',
     email: 'This field is with email invalid',
     minLength: 'This field is with less characters than expected',
+    invalid: 'This field is invalid',
   };
 }
