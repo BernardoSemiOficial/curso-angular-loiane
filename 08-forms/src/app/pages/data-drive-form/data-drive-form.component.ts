@@ -26,6 +26,8 @@ export class DataDriveFormComponent implements OnInit {
     inject(LocalizationService);
   private http: HttpClient = inject(HttpClient);
   form!: FormGroup;
+  states$ = this.localizationService.getStatesBrazil();
+  tecnologies: { id: number; nome: string }[] = [];
 
   ngOnInit() {
     // this.form = new FormGroup({
@@ -39,6 +41,8 @@ export class DataDriveFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
+      tecnologies: [null, Validators.required],
+      newsletter: [false, Validators.required],
       address: this.formBuilder.group({
         cep: [null, Validators.required],
         number: [null, Validators.required],
@@ -50,7 +54,7 @@ export class DataDriveFormComponent implements OnInit {
       }),
     });
 
-    this.getStates();
+    this.getTecnologies();
   }
 
   onSubmit() {
@@ -89,16 +93,6 @@ export class DataDriveFormComponent implements OnInit {
       },
     });
   }
-  getStates() {
-    this.localizationService.getStatesBrazil().subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
 
   populateFields(data: LocalizationBrazil) {
     this.form.patchValue({
@@ -110,5 +104,33 @@ export class DataDriveFormComponent implements OnInit {
         state: data.uf,
       },
     });
+  }
+
+  selectAutoState() {
+    const state = {
+      id: '2',
+      sigla: 'AL',
+      nome: 'Alagoas',
+    };
+
+    this.form.get('address.state')?.setValue(state);
+  }
+
+  compareFn(c1: any, c2: any): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
+
+  getTecnologies() {
+    this.tecnologies = [
+      { id: 1, nome: 'Angular' },
+      { id: 2, nome: 'React' },
+      { id: 3, nome: 'Vue' },
+      { id: 4, nome: 'Svelte' },
+      { id: 5, nome: 'Ember' },
+    ];
+  }
+
+  selectAutoTecnologies() {
+    this.form.get('tecnologies')?.setValue([1, 3, 5]);
   }
 }

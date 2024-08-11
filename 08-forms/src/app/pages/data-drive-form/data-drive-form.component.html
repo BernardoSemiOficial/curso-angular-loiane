@@ -144,16 +144,85 @@
           [feedbackMessage]="{ required: 'State is required.' }"
           [formControlField]="form.get('address.state')"
         >
-          <input
-            type="state"
-            class="form-control"
+          <!-- Trabalhando com um valor simples: string, number, boolean -->
+          <select class="form-control" id="state" formControlName="state">
+            @for (state of states$ | async; track state.id) {
+            <option [value]="state.sigla">{{ state.nome }}</option>
+            }
+          </select>
+          <!-- Trabalhando com um valor complexo: objeto e array -->
+          <select
+            class="form-control mt-1"
             id="state"
             formControlName="state"
-          />
+            [compareWith]="compareFn"
+          >
+            @for (state of states$ | async; track state.id) {
+            <option [ngValue]="state">{{ state.nome }}</option>
+            }
+          </select>
+          <button
+            class="btn btn-secondary mt-1 w-100"
+            (click)="selectAutoState()"
+          >
+            Select state
+          </button>
         </app-form-control-field>
       </div>
     </fieldset>
   </ng-container>
+  <fieldset class="row">
+    <div class="col-sm-3 mb-3">
+      <app-form-control-field
+        fieldName="tecnologies"
+        label="Tecnologies"
+        [feedbackMessage]="{ required: 'Tecnologies is required.' }"
+        [formControlField]="form.get('tecnologies')"
+      >
+        <select
+          multiple
+          class="form-control"
+          id="tecnologies"
+          formControlName="tecnologies"
+        >
+          @for (tec of tecnologies; track tec.id) {
+          <option [value]="tec.id">{{ tec.nome }}</option>
+          }
+        </select>
+        <button
+          class="btn btn-secondary mt-1 w-100"
+          (click)="selectAutoTecnologies()"
+        >
+          Select tecnologies
+        </button>
+      </app-form-control-field>
+    </div>
+    <div class="col-sm-3 mb-3">
+      <app-form-control-field
+        fieldName="newsletter-yes"
+        label="Newsletter"
+        [feedbackMessage]="{ required: 'Newsletter is required.' }"
+        [formControlField]="form.get('newsletter')"
+      >
+        <input
+          type="radio"
+          id="newsletter-yes"
+          [value]="true"
+          formControlName="newsletter"
+          class="mx-2"
+        />Yes
+        <label for="newsletter-no">
+          <input
+            type="radio"
+            id="newsletter-no"
+            [value]="false"
+            formControlName="newsletter"
+            class="mx-2"
+          />No
+        </label>
+      </app-form-control-field>
+    </div>
+  </fieldset>
 
   <pre>
     {{ form.value | json }}
