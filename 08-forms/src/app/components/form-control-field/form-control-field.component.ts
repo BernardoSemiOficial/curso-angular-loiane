@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import { AbstractControl, FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-form-control-field',
@@ -10,8 +10,11 @@ import { FormsModule, NgModel } from '@angular/forms';
   styleUrl: './form-control-field.component.scss',
 })
 export class FormControlFieldComponent {
-  @Input() formControlField!: NgModel;
+  @Input() formControlField!: NgModel | AbstractControl | null;
   @Input() fieldName!: string;
   @Input() label!: string;
-  @Input() feedbackMessage!: string;
+  @Input() feedbackMessage: { [key: string]: string } = {
+    required: 'This field is required',
+    email: 'This field is with email invalid',
+  };
 }

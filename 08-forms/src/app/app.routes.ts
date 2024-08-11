@@ -6,7 +6,7 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'template-driven',
+    redirectTo: 'data-driven',
   },
   {
     path: 'template-driven',

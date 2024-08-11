@@ -8,7 +8,7 @@
     <app-form-control-field
       fieldName="name"
       label="Name"
-      feedbackMessage="Name is required."
+      [feedbackMessage]="{ required: 'Name is required.' }"
       [formControlField]="name"
     >
       <input
@@ -26,7 +26,7 @@
     <app-form-control-field
       fieldName="email"
       label="Email"
-      feedbackMessage="Email is required."
+      [feedbackMessage]="{ required: 'Email is required.' }"
       [formControlField]="email"
     >
       <input
@@ -47,7 +47,7 @@
         <app-form-control-field
           fieldName="cep"
           label="CEP"
-          feedbackMessage="CEP is required."
+          [feedbackMessage]="{ required: 'CEP is required.' }"
           [formControlField]="cep"
         >
           <input
@@ -67,7 +67,7 @@
         <app-form-control-field
           fieldName="number"
           label="Number"
-          feedbackMessage="Number is required."
+          [feedbackMessage]="{ required: 'Number is required.' }"
           [formControlField]="number"
         >
           <input
@@ -86,7 +86,7 @@
         <app-form-control-field
           fieldName="complement"
           label="Complement"
-          feedbackMessage="Complement is required."
+          [feedbackMessage]="{ required: 'Complement is required.' }"
           [formControlField]="complement"
         >
           <input
@@ -106,7 +106,7 @@
       <app-form-control-field
         fieldName="street"
         label="Street"
-        feedbackMessage="Street is required."
+        [feedbackMessage]="{ required: 'Street is required.' }"
         [formControlField]="street"
       >
         <input
@@ -126,7 +126,7 @@
         <app-form-control-field
           fieldName="district"
           label="District"
-          feedbackMessage="District is required."
+          [feedbackMessage]="{ required: 'District is required.' }"
           [formControlField]="district"
         >
           <input
@@ -145,7 +145,7 @@
         <app-form-control-field
           fieldName="city"
           label="City"
-          feedbackMessage="City is required."
+          [feedbackMessage]="{ required: 'City is required.' }"
           [formControlField]="city"
         >
           <input
@@ -164,7 +164,7 @@
         <app-form-control-field
           fieldName="state"
           label="State"
-          feedbackMessage="State is required."
+          [feedbackMessage]="{ required: 'State is required.' }"
           [formControlField]="state"
         >
           <input
@@ -197,8 +197,3 @@
     Submit
   </button>
 </form>
-
-<!-- <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div> -->

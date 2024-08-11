@@ -1,10 +1,16 @@
 <label
   [for]="fieldName"
   class="form-label"
-  [class.text-danger]="formControlField.errors?.['required'] && formControlField.touched"
+  [class.text-danger]="formControlField?.errors?.['required'] && formControlField?.touched"
   >{{ label }}</label
 >
 <ng-content></ng-content>
-@if(formControlField.errors?.['required'] && formControlField.touched) {
-<div class="alert alert-warning" role="alert">{{ feedbackMessage }}</div>
+@if(formControlField?.errors?.['required'] && formControlField?.touched) {
+<div class="alert alert-warning" role="alert">
+  {{ feedbackMessage["required"] }}
+</div>
+} @if(formControlField?.errors?.['email'] && formControlField?.touched) {
+<div class="alert alert-warning" role="alert">
+  {{ feedbackMessage["email"] }}
+</div>
 }

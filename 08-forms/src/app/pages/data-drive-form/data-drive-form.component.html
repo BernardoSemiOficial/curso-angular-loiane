@@ -1,1 +1,162 @@
-<p>data-drive-form works!</p>
+<form class="container mt-5" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset class="col-sm-12 mb-3">
+    <app-form-control-field
+      fieldName="name"
+      label="Name"
+      [feedbackMessage]="{ required: 'Name is required.' }"
+      [formControlField]="form.get('name')"
+    >
+      <input
+        id="name"
+        type="name"
+        name="name"
+        class="form-control"
+        required
+        #name
+        formControlName="name"
+      />
+    </app-form-control-field>
+  </fieldset>
+  <fieldset class="col-sm-12 mb-3">
+    <app-form-control-field
+      fieldName="email"
+      label="Email"
+      [feedbackMessage]="{
+        required: 'Email is required.',
+        email: 'Email is invalid.'
+      }"
+      [formControlField]="form.get('email')"
+    >
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        name="email"
+        required
+        email
+        formControlName="email"
+      />
+    </app-form-control-field>
+  </fieldset>
+
+  <ng-container formGroupName="address">
+    <fieldset class="row">
+      <div class="col-sm-3 mb-3">
+        <app-form-control-field
+          fieldName="cep"
+          label="CEP"
+          [feedbackMessage]="{ required: 'CEP is required.' }"
+          [formControlField]="form.get('address.cep')"
+        >
+          <input
+            type="text"
+            class="form-control"
+            id="cep"
+            formControlName="cep"
+          />
+        </app-form-control-field>
+      </div>
+      <div class="col-sm-3 mb-3">
+        <app-form-control-field
+          fieldName="number"
+          label="Number"
+          [feedbackMessage]="{ required: 'Number is required.' }"
+          [formControlField]="form.get('address.number')"
+        >
+          <input
+            type="number"
+            class="form-control"
+            id="number"
+            formControlName="number"
+          />
+        </app-form-control-field>
+      </div>
+      <div class="col-sm-6 mb-3">
+        <app-form-control-field
+          fieldName="complement"
+          label="Complement"
+          [feedbackMessage]="{ required: 'Complement is required.' }"
+          [formControlField]="form.get('address.complement')"
+        >
+          <input
+            type="complement"
+            class="form-control"
+            id="complement"
+            formControlName="complement"
+          />
+        </app-form-control-field>
+      </div>
+    </fieldset>
+    <fieldset class="col-sm-12 mb-3">
+      <app-form-control-field
+        fieldName="street"
+        label="Street"
+        [feedbackMessage]="{ required: 'Street is required.' }"
+        [formControlField]="form.get('address.street')"
+      >
+        <input
+          type="street"
+          class="form-control"
+          id="street"
+          formControlName="street"
+        />
+      </app-form-control-field>
+    </fieldset>
+    <fieldset class="row">
+      <div class="col-sm-5 mb-3">
+        <app-form-control-field
+          fieldName="district"
+          label="District"
+          [feedbackMessage]="{ required: 'District is required.' }"
+          [formControlField]="form.get('address.district')"
+        >
+          <input
+            type="district"
+            class="form-control"
+            id="district"
+            formControlName="district"
+          />
+        </app-form-control-field>
+      </div>
+      <div class="col-sm-4 mb-3">
+        <app-form-control-field
+          fieldName="city"
+          label="City"
+          [feedbackMessage]="{ required: 'City is required.' }"
+          [formControlField]="form.get('address.city')"
+        >
+          <input
+            type="city"
+            class="form-control"
+            id="city"
+            formControlName="city"
+          />
+        </app-form-control-field>
+      </div>
+      <div class="col-sm-3 mb-3">
+        <app-form-control-field
+          fieldName="state"
+          label="State"
+          [feedbackMessage]="{ required: 'State is required.' }"
+          [formControlField]="form.get('address.state')"
+        >
+          <input
+            type="state"
+            class="form-control"
+            id="state"
+            formControlName="state"
+          />
+        </app-form-control-field>
+      </div>
+    </fieldset>
+  </ng-container>
+
+  <pre>
+    {{ form.value | json }}
+  </pre>
+
+  <button type="button" class="btn btn-secondary" (click)="resetForm()">
+    Reset
+  </button>
+  <button type="submit" class="btn btn-primary ms-1">Submit</button>
+</form>
