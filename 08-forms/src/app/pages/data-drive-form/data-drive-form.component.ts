@@ -43,9 +43,9 @@ export class DataDriveFormComponent implements OnInit {
         cep: [null, Validators.required],
         number: [null, Validators.required],
         complement: [null],
-        street: [{ value: null, disabled: true }, Validators.required],
-        district: [{ value: null, disabled: true }, Validators.required],
-        city: [{ value: null, disabled: true }, Validators.required],
+        street: [null, Validators.required],
+        district: [null, Validators.required],
+        city: [null, Validators.required],
         state: [null, [Validators.required]],
       }),
     });
@@ -78,15 +78,8 @@ export class DataDriveFormComponent implements OnInit {
   getAddress() {
     const cep = this.form.get('address.cep')?.value;
     console.log(cep);
-    if (!cep) return;
 
-    const cepCleaded = cep.replace(/\D/g, '');
-    const cepValidRegex = /^\d{8}$/;
-    const isCepValid = cepValidRegex.test(cepCleaded);
-
-    if (!isCepValid) console.log('CEP invalid');
-
-    this.localizationService.getAddressInfo(cepCleaded).subscribe({
+    this.localizationService.validateAndGetAddress(cep).subscribe({
       next: (data) => {
         console.log(data);
         this.populateFields(data);

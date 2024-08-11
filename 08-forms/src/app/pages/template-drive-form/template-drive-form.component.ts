@@ -43,16 +43,7 @@ export class TemplateDriveFormComponent {
   }
 
   getAddress(cep: string) {
-    if (!cep) return;
-    console.log(cep);
-
-    const cepCleaded = cep.replace(/\D/g, '');
-    const cepValidRegex = /^\d{8}$/;
-    const isCepValid = cepValidRegex.test(cepCleaded);
-
-    if (!isCepValid) console.log('CEP invalid');
-
-    this.localizationService.getAddressInfo(cepCleaded).subscribe({
+    this.localizationService.validateAndGetAddress(cep).subscribe({
       next: (data) => {
         console.log(data);
         this.populateFields(data);

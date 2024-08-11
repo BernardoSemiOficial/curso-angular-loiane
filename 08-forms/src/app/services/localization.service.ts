@@ -32,4 +32,19 @@ export class LocalizationService {
   getStatesBrazil(): Observable<StateBrazil[]> {
     return this.http.get<StateBrazil[]>('assets/states/brazil.json');
   }
+
+  validateAndGetAddress(cep: string): Observable<LocalizationBrazil> {
+    if (!cep) {
+      throw new Error('CEP is required');
+    }
+    const cepCleaded = cep.replace(/\D/g, '');
+    const cepValidRegex = /^\d{8}$/;
+    const isCepValid = cepValidRegex.test(cepCleaded);
+
+    if (!isCepValid) {
+      throw new Error('CEP invalid');
+    }
+
+    return this.getAddressInfo(cepCleaded);
+  }
 }
