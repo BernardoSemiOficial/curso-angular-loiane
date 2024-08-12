@@ -48,6 +48,10 @@ export class DataDriveFormComponent implements OnInit {
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
+      confirmEmail: [
+        null,
+        [this.formsValidationService.validateIqualsFields('email')],
+      ],
       tecnologies: [null, Validators.required],
       newsletter: [null, Validators.required],
       terms: [null, [Validators.required, Validators.requiredTrue]],

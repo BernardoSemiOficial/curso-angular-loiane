@@ -1,9 +1,10 @@
 <label
   [for]="fieldName"
   class="form-label"
-  [class.text-danger]="(formControlField?.errors?.['required'] || formControlField?.errors?.['email'] || formControlField?.errors?.['minLength']) && formControlField?.touched"
-  >{{ label }}</label
+  [class.text-danger]="(formControlField?.errors?.['required'] || formControlField?.errors?.['email'] || formControlField?.errors?.['minLength'] || formControlField?.errors?.['invalid'] || formControlField?.errors?.['notIquals']) && formControlField?.touched"
 >
+  {{ label }}
+</label>
 <ng-content></ng-content>
 @if(formControlField?.errors?.['required'] && formControlField?.touched) {
 <div class="alert alert-warning" role="alert">
@@ -22,5 +23,10 @@ formControlField?.touched) {
 {
 <div class="alert alert-warning" role="alert">
   {{ feedbackMessage["invalid"] }}
+</div>
+} @else if (formControlField?.errors?.['notIquals'] &&
+formControlField?.touched) {
+<div class="alert alert-warning" role="alert">
+  {{ feedbackMessage["notIquals"] }}
 </div>
 }

@@ -10,6 +10,21 @@ import {
   providedIn: 'root',
 })
 export class FormsValidationService {
+  validateIqualsFields(fieldToCompare: string): ValidatorFn {
+    return (
+      control: AbstractControl<{ [key: string]: FormControl<string | null> }>
+    ) => {
+      const fieldToCompareControl = control.parent?.get(fieldToCompare);
+      if (
+        control?.value !== fieldToCompareControl?.value &&
+        fieldToCompareControl?.touched
+      )
+        return { notIquals: true };
+
+      return null;
+    };
+  }
+
   validateCep(control: AbstractControl): ValidationErrors | null {
     const cepCleaded = control?.value?.replace(/\D/g, '');
     const cepValidRegex = /^\d{8}$/;

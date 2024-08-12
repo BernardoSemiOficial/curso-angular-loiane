@@ -11,8 +11,6 @@
         type="name"
         name="name"
         class="form-control"
-        required
-        #name
         formControlName="name"
       />
     </app-form-control-field>
@@ -32,9 +30,25 @@
         class="form-control"
         id="email"
         name="email"
-        required
-        email
         formControlName="email"
+      />
+    </app-form-control-field>
+  </fieldset>
+  <fieldset class="col-sm-12 mb-3">
+    <app-form-control-field
+      fieldName="email"
+      label="Confirm email"
+      [feedbackMessage]="{
+        notIquals: 'Email is not equals.',
+      }"
+      [formControlField]="form.get('confirmEmail')"
+    >
+      <input
+        type="email"
+        class="form-control"
+        id="confirmEmail"
+        name="confirmEmail"
+        formControlName="confirmEmail"
       />
     </app-form-control-field>
   </fieldset>
