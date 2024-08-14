@@ -21,10 +21,14 @@
       label="Email"
       [feedbackMessage]="{
         required: 'Email is required.',
-        email: 'Email is invalid.'
+        email: 'Email is invalid.',
+        emailExists: 'Email already exists.',
+        pending: 'Checking email...',
+        valid: 'Email is valid.'
       }"
       [formControlField]="form.get('email')"
     >
+      {{ form.get("email")?.status }}
       <input
         type="email"
         class="form-control"

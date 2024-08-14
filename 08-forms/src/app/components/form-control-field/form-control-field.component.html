@@ -1,7 +1,7 @@
 <label
   [for]="fieldName"
   class="form-label"
-  [class.text-danger]="(formControlField?.errors?.['required'] || formControlField?.errors?.['email'] || formControlField?.errors?.['minLength'] || formControlField?.errors?.['invalid'] || formControlField?.errors?.['notIquals']) && formControlField?.touched"
+  [class.text-danger]="(formControlField?.errors?.['required'] || formControlField?.errors?.['email'] || formControlField?.errors?.['minLength'] || formControlField?.errors?.['invalid'] || formControlField?.errors?.['notIquals'] || formControlField?.errors?.['emailExists']) && formControlField?.touched"
 >
   {{ label }}
 </label>
@@ -28,5 +28,21 @@ formControlField?.touched) {
 formControlField?.touched) {
 <div class="alert alert-warning" role="alert">
   {{ feedbackMessage["notIquals"] }}
+</div>
+} @else if (formControlField?.errors?.['emailExists'] &&
+formControlField?.touched) {
+<div class="alert alert-warning" role="alert">
+  {{ feedbackMessage["emailExists"] }}
+</div>
+}
+
+<!-- SUCCESS -->
+@if (formControlField?.status === 'PENDING' && formControlField?.touched) {
+<div class="alert alert-success" role="alert">
+  {{ feedbackMessage["pending"] }}
+</div>
+} @if (formControlField?.status === 'VALID' && formControlField?.touched) {
+<div class="alert alert-success" role="alert">
+  {{ feedbackMessage["valid"] }}
 </div>
 }

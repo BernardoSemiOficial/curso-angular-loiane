@@ -5,11 +5,23 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs';
+import { UsersService } from '../users/users.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FormsValidationService {
+  validateEmail(usersService: UsersService): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return usersService.emailExists(control.value).pipe(
+        debounceTime(2000),
+        distinctUntilChanged(),
+        map((emailExists) => (emailExists ? { emailExists: true } : null))
+      );
+    };
+  }
+
   validateIqualsFields(fieldToCompare: string): ValidatorFn {
     return (
       control: AbstractControl<{ [key: string]: FormControl<string | null> }>

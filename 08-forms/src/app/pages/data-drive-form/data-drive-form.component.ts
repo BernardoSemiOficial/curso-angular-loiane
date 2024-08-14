@@ -15,6 +15,7 @@ import {
   LocalizationBrazil,
   LocalizationService,
 } from '../../services/localization/localization.service';
+import { UsersService } from '../../services/users/users.service';
 
 @Component({
   selector: 'app-data-drive-form',
@@ -31,6 +32,7 @@ export class DataDriveFormComponent implements OnInit {
   private formsValidationService: FormsValidationService = inject(
     FormsValidationService
   );
+  private usersService: UsersService = inject(UsersService);
   form!: FormGroup;
   states$ = this.localizationService.getStatesBrazil();
   tecnologies: { id: number; nome: string }[] = [];
@@ -47,7 +49,15 @@ export class DataDriveFormComponent implements OnInit {
     // })
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
-      email: [null, [Validators.required, Validators.email]],
+      email: [
+        null,
+        {
+          validators: [Validators.required, Validators.email],
+          asyncValidators: [
+            this.formsValidationService.validateEmail(this.usersService),
+          ],
+        },
+      ],
       confirmEmail: [
         null,
         [this.formsValidationService.validateIqualsFields('email')],
