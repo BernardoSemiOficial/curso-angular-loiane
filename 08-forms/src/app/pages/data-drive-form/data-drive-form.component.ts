@@ -9,7 +9,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { FormControlFieldComponent } from '../../components/form-control-field/form-control-field.component';
+import {
+  FormControlFieldComponent,
+  MessageType,
+} from '../../components/form-control-field/form-control-field.component';
 import { FormsValidationService } from '../../services/forms/forms-validation.service';
 import {
   LocalizationBrazil,
@@ -37,6 +40,7 @@ export class DataDriveFormComponent implements OnInit {
   states$ = this.localizationService.getStatesBrazil();
   tecnologies: { id: number; nome: string }[] = [];
   frameworks: string[] = ['Angular', 'React', 'Vue', 'Svelte', 'Ember'];
+  MessageType = MessageType;
 
   ngOnInit() {
     // this.form = new FormGroup({

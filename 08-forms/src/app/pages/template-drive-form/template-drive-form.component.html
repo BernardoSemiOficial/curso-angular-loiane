@@ -8,7 +8,9 @@
     <app-form-control-field
       fieldName="name"
       label="Name"
-      [feedbackMessage]="{ required: 'Name is required.' }"
+      [message]="{
+        required: { text: 'Name is required.', type: MessageType.alertWarning }
+      }"
       [formControlField]="name"
     >
       <input
@@ -26,7 +28,9 @@
     <app-form-control-field
       fieldName="email"
       label="Email"
-      [feedbackMessage]="{ required: 'Email is required.' }"
+      [message]="{
+        required: { text: 'Email is required.', type: MessageType.alertWarning }
+      }"
       [formControlField]="email"
     >
       <input
@@ -47,7 +51,12 @@
         <app-form-control-field
           fieldName="cep"
           label="CEP"
-          [feedbackMessage]="{ required: 'CEP is required.' }"
+          [message]="{
+            required: {
+              text: 'CEP is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="cep"
         >
           <input
@@ -67,7 +76,12 @@
         <app-form-control-field
           fieldName="number"
           label="Number"
-          [feedbackMessage]="{ required: 'Number is required.' }"
+          [message]="{
+            required: {
+              text: 'Number is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="number"
         >
           <input
@@ -86,7 +100,12 @@
         <app-form-control-field
           fieldName="complement"
           label="Complement"
-          [feedbackMessage]="{ required: 'Complement is required.' }"
+          [message]="{
+            required: {
+              text: 'Complement is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="complement"
         >
           <input
@@ -106,7 +125,12 @@
       <app-form-control-field
         fieldName="street"
         label="Street"
-        [feedbackMessage]="{ required: 'Street is required.' }"
+        [message]="{
+          required: {
+            text: 'Street is required.',
+            type: MessageType.alertWarning
+          }
+        }"
         [formControlField]="street"
       >
         <input
@@ -126,7 +150,12 @@
         <app-form-control-field
           fieldName="district"
           label="District"
-          [feedbackMessage]="{ required: 'District is required.' }"
+          [message]="{
+            required: {
+              text: 'District is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="district"
         >
           <input
@@ -145,7 +174,12 @@
         <app-form-control-field
           fieldName="city"
           label="City"
-          [feedbackMessage]="{ required: 'City is required.' }"
+          [message]="{
+            required: {
+              text: 'City is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="city"
         >
           <input
@@ -164,7 +198,12 @@
         <app-form-control-field
           fieldName="state"
           label="State"
-          [feedbackMessage]="{ required: 'State is required.' }"
+          [message]="{
+            required: {
+              text: 'State is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="state"
         >
           <input

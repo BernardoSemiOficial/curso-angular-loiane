@@ -3,7 +3,9 @@
     <app-form-control-field
       fieldName="name"
       label="Name"
-      [feedbackMessage]="{ required: 'Name is required.' }"
+      [message]="{
+        required: { text: 'Name is required.', type: MessageType.alertWarning }
+      }"
       [formControlField]="form.get('name')"
     >
       <input
@@ -19,12 +21,12 @@
     <app-form-control-field
       fieldName="email"
       label="Email"
-      [feedbackMessage]="{
-        required: 'Email is required.',
-        email: 'Email is invalid.',
-        emailExists: 'Email already exists.',
-        pending: 'Checking email...',
-        valid: 'Email is valid.'
+      [message]="{
+        required: { text: 'Email is required.', type: MessageType.alertDanger },
+        email: { text: 'Email is invalid.', type: MessageType.alertDanger },
+        emailExists: { text: 'Email already exists.', type: MessageType.alertDanger },
+        pending: { text: 'Checking email...', type: MessageType.alertWarning },
+        valid: { text: 'Email is valid.', type: MessageType.alertSuccess },
       }"
       [formControlField]="form.get('email')"
     >
@@ -42,8 +44,8 @@
     <app-form-control-field
       fieldName="email"
       label="Confirm email"
-      [feedbackMessage]="{
-        notIquals: 'Email is not equals.',
+      [message]="{
+        notIquals: { text: 'Email is not equals.', type: MessageType.alertDanger },
       }"
       [formControlField]="form.get('confirmEmail')"
     >
@@ -63,9 +65,9 @@
         <app-form-control-field
           fieldName="cep"
           label="CEP"
-          [feedbackMessage]="{
-            required: 'CEP is required.',
-            invalid: 'CEP is invalid'
+          [message]="{
+            required: { text: 'CEP is required.', type: MessageType.alertWarning },
+            invalid: { text: 'CEP is invalid.', type: MessageType.alertDanger },
           }"
           [formControlField]="form.get('address.cep')"
         >
@@ -82,7 +84,12 @@
         <app-form-control-field
           fieldName="number"
           label="Number"
-          [feedbackMessage]="{ required: 'Number is required.' }"
+          [message]="{
+            required: {
+              text: 'Number is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="form.get('address.number')"
         >
           <input
@@ -97,7 +104,12 @@
         <app-form-control-field
           fieldName="complement"
           label="Complement"
-          [feedbackMessage]="{ required: 'Complement is required.' }"
+          [message]="{
+            required: {
+              text: 'Complement is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="form.get('address.complement')"
         >
           <input
@@ -113,7 +125,12 @@
       <app-form-control-field
         fieldName="street"
         label="Street"
-        [feedbackMessage]="{ required: 'Street is required.' }"
+        [message]="{
+          required: {
+            text: 'Street is required.',
+            type: MessageType.alertWarning
+          }
+        }"
         [formControlField]="form.get('address.street')"
       >
         <input
@@ -130,7 +147,12 @@
         <app-form-control-field
           fieldName="district"
           label="District"
-          [feedbackMessage]="{ required: 'District is required.' }"
+          [message]="{
+            required: {
+              text: 'District is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="form.get('address.district')"
         >
           <input
@@ -146,7 +168,12 @@
         <app-form-control-field
           fieldName="city"
           label="City"
-          [feedbackMessage]="{ required: 'City is required.' }"
+          [message]="{
+            required: {
+              text: 'City is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="form.get('address.city')"
         >
           <input
@@ -162,7 +189,12 @@
         <app-form-control-field
           fieldName="state"
           label="State"
-          [feedbackMessage]="{ required: 'State is required.' }"
+          [message]="{
+            required: {
+              text: 'State is required.',
+              type: MessageType.alertWarning
+            }
+          }"
           [formControlField]="form.get('address.state')"
         >
           <!-- Trabalhando com um valor simples: string, number, boolean -->
@@ -197,7 +229,12 @@
       <app-form-control-field
         fieldName="tecnologies"
         label="Tecnologies"
-        [feedbackMessage]="{ required: 'Tecnologies is required.' }"
+        [message]="{
+          required: {
+            text: 'Tecnologies is required.',
+            type: MessageType.alertWarning
+          }
+        }"
         [formControlField]="form.get('tecnologies')"
       >
         <select
@@ -222,7 +259,12 @@
       <app-form-control-field
         fieldName="newsletter-yes"
         label="Newsletter"
-        [feedbackMessage]="{ required: 'Newsletter is required.' }"
+        [message]="{
+          required: {
+            text: 'Newsletter is required.',
+            type: MessageType.alertWarning
+          }
+        }"
         [formControlField]="form.get('newsletter')"
       >
         <div>
@@ -249,7 +291,12 @@
       <app-form-control-field
         fieldName="terms"
         label="Terms"
-        [feedbackMessage]="{ required: 'Terms is required.' }"
+        [message]="{
+          required: {
+            text: 'Terms is required.',
+            type: MessageType.alertWarning
+          }
+        }"
         [formControlField]="form.get('terms')"
       >
         <div>
@@ -266,9 +313,9 @@
       <app-form-control-field
         fieldName="frameworks"
         label="Frameworks"
-        [feedbackMessage]="{
-          required: 'Frameworks is required.',
-          minLength: 'Select at least two framework.'
+        [message]="{
+          required: { text: 'Frameworks is required.', type: MessageType.alertWarning },
+          minLength: { text: 'Select at least two framework.', type: MessageType.alertWarning },
         }"
         [formControlField]="form.get('frameworks')"
       >

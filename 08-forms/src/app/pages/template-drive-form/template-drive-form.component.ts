@@ -2,7 +2,10 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, ViewChild } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { FormControlFieldComponent } from '../../components/form-control-field/form-control-field.component';
+import {
+  FormControlFieldComponent,
+  MessageType,
+} from '../../components/form-control-field/form-control-field.component';
 import {
   LocalizationBrazil,
   LocalizationService,
@@ -21,6 +24,8 @@ export class TemplateDriveFormComponent {
   private http: HttpClient = inject(HttpClient);
 
   @ViewChild('formTemplateDrive') form!: NgForm;
+
+  MessageType = MessageType;
 
   usuario: any = {
     name: '',
