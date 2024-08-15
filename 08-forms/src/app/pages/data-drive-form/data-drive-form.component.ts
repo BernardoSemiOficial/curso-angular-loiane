@@ -14,6 +14,7 @@ import {
   FormControlFieldComponent,
   MessageType,
 } from '../../components/form-control-field/form-control-field.component';
+import { FormReactiveControlInputComponent } from '../../components/form-reactive-control-input/form-reactive-control-input.component';
 import { FormsValidationService } from '../../services/forms/forms-validation.service';
 import {
   LocalizationBrazil,
@@ -24,7 +25,12 @@ import { UsersService } from '../../services/users/users.service';
 @Component({
   selector: 'app-data-drive-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormControlFieldComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormControlFieldComponent,
+    FormReactiveControlInputComponent,
+  ],
   templateUrl: './data-drive-form.component.html',
   styleUrl: './data-drive-form.component.scss',
 })

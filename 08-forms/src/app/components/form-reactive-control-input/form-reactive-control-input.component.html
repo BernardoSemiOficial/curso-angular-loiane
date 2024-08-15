@@ -1,0 +1,43 @@
+@let formControlAnalytics = analyticsFormControl();
+
+<label
+  [for]="fieldName"
+  class="form-label"
+  [ngClass]="{
+    'text-danger':
+      formControlField?.touched && formControlAnalytics.errorsLength,
+    'text-success':
+      formControlField?.touched && !formControlAnalytics.errorsLength
+  }"
+>
+  {{ label }}
+</label>
+<input
+  [id]="fieldName"
+  [type]="type"
+  class="form-control"
+  [disabled]="isDisabled"
+  [(ngModel)]="controlValue"
+  (ngModelChange)="_onChange(controlValue)"
+  (blur)="_onTouched()"
+/>
+@if (formControlAnalytics.errorsLength && message[formControlAnalytics.errorKey]
+&& formControlField?.touched) {
+<div
+  class="alert"
+  [ngClass]="message[formControlAnalytics.errorKey].type"
+  role="alert"
+>
+  {{ message[formControlAnalytics.errorKey].text }}
+</div>
+} @if (['pending', 'valid'].includes(formControlAnalytics.status) &&
+formControlAnalytics.status && message[formControlAnalytics.status] &&
+formControlField?.touched) {
+<div
+  class="alert"
+  [ngClass]="message[formControlAnalytics.status].type"
+  role="alert"
+>
+  {{ message[formControlAnalytics.status].text }}
+</div>
+}

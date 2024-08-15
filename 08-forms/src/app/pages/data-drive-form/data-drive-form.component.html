@@ -1,6 +1,6 @@
 <form class="container mt-5" [formGroup]="form" (ngSubmit)="onSubmit()">
   <fieldset class="col-sm-12 mb-3">
-    <app-form-control-field
+    <app-form-reactive-control-input
       fieldName="name"
       label="Name"
       formControlName="name"
@@ -9,12 +9,15 @@
         required: { text: 'Name is required.', type: MessageType.alertWarning }
       }"
     >
-    </app-form-control-field>
+    </app-form-reactive-control-input>
   </fieldset>
   <fieldset class="col-sm-12 mb-3">
-    <app-form-control-field
+    <app-form-reactive-control-input
       fieldName="email"
       label="Email"
+      type="email"
+      formControlName="email"
+      [formControlField]="form.get('email')"
       [message]="{
         required: { text: 'Email is required.', type: MessageType.alertDanger },
         email: { text: 'Email is invalid.', type: MessageType.alertDanger },
@@ -22,62 +25,46 @@
         pending: { text: 'Checking email...', type: MessageType.alertWarning },
         valid: { text: 'Email is valid.', type: MessageType.alertSuccess },
       }"
-      [formControlField]="form.get('email')"
     >
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        name="email"
-        formControlName="email"
-      />
-    </app-form-control-field>
+    </app-form-reactive-control-input>
   </fieldset>
   <fieldset class="col-sm-12 mb-3">
-    <app-form-control-field
+    <app-form-reactive-control-input
       fieldName="email"
       label="Confirm email"
+      type="email"
+      formControlName="confirmEmail"
+      [formControlField]="form.get('confirmEmail')"
       [message]="{
         notIquals: { text: 'Email is not equals.', type: MessageType.alertDanger },
       }"
-      [formControlField]="form.get('confirmEmail')"
     >
-      <input
-        type="email"
-        class="form-control"
-        id="confirmEmail"
-        name="confirmEmail"
-        formControlName="confirmEmail"
-      />
-    </app-form-control-field>
+    </app-form-reactive-control-input>
   </fieldset>
 
   <ng-container formGroupName="address">
     <fieldset class="row">
       <div class="col-sm-3 mb-3">
-        <app-form-control-field
+        <app-form-reactive-control-input
           fieldName="cep"
           label="CEP"
+          type="text"
+          formControlName="cep"
+          [formControlField]="form.get('address.cep')"
           [message]="{
             required: { text: 'CEP is required.', type: MessageType.alertWarning },
             invalid: { text: 'CEP is invalid.', type: MessageType.alertDanger },
           }"
-          [formControlField]="form.get('address.cep')"
         >
-          <input
-            type="text"
-            class="form-control"
-            id="cep"
-            formControlName="cep"
-          />
-        </app-form-control-field>
+        </app-form-reactive-control-input>
       </div>
       <div class="col-sm-3 mb-3">
-        <app-form-control-field
+        <app-form-reactive-control-input
           fieldName="number"
           label="Number"
           type="number"
           id="number"
+          formControlName="number"
           [formControlField]="form.get('address.number')"
           [message]="{
             required: {
@@ -86,104 +73,82 @@
             }
           }"
         >
-        </app-form-control-field>
+        </app-form-reactive-control-input>
       </div>
       <div class="col-sm-6 mb-3">
-        <app-form-control-field
+        <app-form-reactive-control-input
           fieldName="complement"
           label="Complement"
+          type="complement"
+          formControlName="complement"
+          [formControlField]="form.get('address.complement')"
           [message]="{
             required: {
               text: 'Complement is required.',
               type: MessageType.alertWarning
             }
           }"
-          [formControlField]="form.get('address.complement')"
         >
-          <input
-            type="complement"
-            class="form-control"
-            id="complement"
-            formControlName="complement"
-          />
-        </app-form-control-field>
+        </app-form-reactive-control-input>
       </div>
     </fieldset>
     <fieldset class="col-sm-12 mb-3">
-      <app-form-control-field
+      <app-form-reactive-control-input
         fieldName="street"
         label="Street"
+        formControlName="street"
+        [formControlField]="form.get('address.street')"
         [message]="{
           required: {
             text: 'Street is required.',
             type: MessageType.alertWarning
           }
         }"
-        [formControlField]="form.get('address.street')"
       >
-        <input
-          type="street"
-          class="form-control"
-          id="street"
-          formControlName="street"
-          readonly
-        />
-      </app-form-control-field>
+      </app-form-reactive-control-input>
     </fieldset>
     <fieldset class="row">
       <div class="col-sm-5 mb-3">
-        <app-form-control-field
+        <app-form-reactive-control-input
           fieldName="district"
           label="District"
+          formControlName="district"
+          [formControlField]="form.get('address.district')"
           [message]="{
             required: {
               text: 'District is required.',
               type: MessageType.alertWarning
             }
           }"
-          [formControlField]="form.get('address.district')"
         >
-          <input
-            type="district"
-            class="form-control"
-            id="district"
-            formControlName="district"
-            readonly
-          />
-        </app-form-control-field>
+        </app-form-reactive-control-input>
       </div>
       <div class="col-sm-4 mb-3">
-        <app-form-control-field
+        <app-form-reactive-control-input
           fieldName="city"
           label="City"
+          formControlName="city"
+          [formControlField]="form.get('address.city')"
           [message]="{
             required: {
               text: 'City is required.',
               type: MessageType.alertWarning
             }
           }"
-          [formControlField]="form.get('address.city')"
         >
-          <input
-            type="city"
-            class="form-control"
-            id="city"
-            formControlName="city"
-            readonly
-          />
-        </app-form-control-field>
+        </app-form-reactive-control-input>
       </div>
       <div class="col-sm-3 mb-3">
         <app-form-control-field
           fieldName="state"
           label="State"
+          [formControlField]="form.get('address.state')"
           [message]="{
             required: {
               text: 'State is required.',
               type: MessageType.alertWarning
             }
           }"
-          [formControlField]="form.get('address.state')"
         >
           <!-- Trabalhando com um valor simples: string, number, boolean -->
           <select class="form-control" id="state" formControlName="state">
@@ -247,13 +212,13 @@
       <app-form-control-field
         fieldName="newsletter-yes"
         label="Newsletter"
+        [formControlField]="form.get('newsletter')"
         [message]="{
           required: {
             text: 'Newsletter is required.',
             type: MessageType.alertWarning
           }
         }"
-        [formControlField]="form.get('newsletter')"
       >
         <div>
           <input
@@ -279,13 +244,13 @@
       <app-form-control-field
         fieldName="terms"
         label="Terms"
+        [formControlField]="form.get('terms')"
         [message]="{
           required: {
             text: 'Terms is required.',
             type: MessageType.alertWarning
           }
         }"
-        [formControlField]="form.get('terms')"
       >
         <div>
           <input
@@ -301,11 +266,11 @@
       <app-form-control-field
         fieldName="frameworks"
         label="Frameworks"
+        [formControlField]="form.get('frameworks')"
         [message]="{
           required: { text: 'Frameworks is required.', type: MessageType.alertWarning },
           minLength: { text: 'Select at least two framework.', type: MessageType.alertWarning },
         }"
-        [formControlField]="form.get('frameworks')"
       >
         @for (framework of frameworksFormArray.controls; track framework; let
         idx = $index) {
