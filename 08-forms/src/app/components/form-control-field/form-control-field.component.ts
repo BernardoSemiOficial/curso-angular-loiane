@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { AbstractControl, FormsModule, NgModel } from '@angular/forms';
 
 export enum MessageType {
@@ -15,7 +15,7 @@ export enum MessageType {
   templateUrl: './form-control-field.component.html',
   styleUrl: './form-control-field.component.scss',
 })
-export class FormControlFieldComponent implements OnChanges {
+export class FormControlFieldComponent {
   @Input() formControlField!: NgModel | AbstractControl | null;
   @Input() formControlFieldValue!: any;
   @Input() fieldName!: string;
@@ -41,10 +41,6 @@ export class FormControlFieldComponent implements OnChanges {
     },
     invalid: { text: 'This field is invalid', type: MessageType.alertDanger },
   };
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log('ngOnChanges', changes);
-  }
 
   analyticsFormControl() {
     const formControl = this.formControlField;

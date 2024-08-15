@@ -9,6 +9,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { distinctUntilChanged, of, switchMap } from 'rxjs';
 import {
   FormControlFieldComponent,
   MessageType,
@@ -85,6 +86,26 @@ export class DataDriveFormComponent implements OnInit {
     });
 
     this.getTecnologies();
+    this.observarFieldZip();
+  }
+
+  observarFieldZip() {
+    this.form
+      .get('address.cep')
+      ?.statusChanges.pipe(
+        distinctUntilChanged(),
+        switchMap((status) =>
+          status === 'VALID'
+            ? this.localizationService.validateAndGetAddress(
+                this.form.get('address.cep')?.value
+              )
+            : of()
+        )
+      )
+      .subscribe((data) => {
+        console.log(data);
+        this.populateFields(data);
+      });
   }
 
   get frameworksFormArray(): FormArray<
