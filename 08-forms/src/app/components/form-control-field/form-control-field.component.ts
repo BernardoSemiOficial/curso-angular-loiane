@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { AbstractControl, FormsModule, NgModel } from '@angular/forms';
+import { Component, forwardRef, Input } from '@angular/core';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALUE_ACCESSOR,
+  NgModel,
+} from '@angular/forms';
 
 export enum MessageType {
   alertWarning = 'alert-warning',
@@ -12,35 +18,24 @@ export enum MessageType {
   selector: 'app-form-control-field',
   standalone: true,
   imports: [CommonModule, FormsModule],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => FormControlFieldComponent),
+      multi: true,
+    },
+  ],
   templateUrl: './form-control-field.component.html',
   styleUrl: './form-control-field.component.scss',
 })
-export class FormControlFieldComponent {
+export class FormControlFieldComponent implements ControlValueAccessor {
   @Input() formControlField!: NgModel | AbstractControl | null;
-  @Input() formControlFieldValue!: any;
   @Input() fieldName!: string;
   @Input() label!: string;
-  @Input() feedbackMessage: { [key: string]: string } = {
-    required: 'This field is required',
-    email: 'This field is with email invalid',
-    minLength: 'This field is with less characters than expected',
-    invalid: 'This field is invalid',
-  };
-  @Input() message: { [key: string]: { text: string; type: MessageType } } = {
-    required: {
-      text: 'This field is required',
-      type: MessageType.alertWarning,
-    },
-    email: {
-      text: 'This field is with email invalid',
-      type: MessageType.alertDanger,
-    },
-    minLength: {
-      text: 'This field is with less characters than expected',
-      type: MessageType.alertDanger,
-    },
-    invalid: { text: 'This field is invalid', type: MessageType.alertDanger },
-  };
+  @Input() type: string = 'text';
+  @Input() message!: { [key: string]: { text: string; type: MessageType } };
+  controlValue: any;
+  isDisabled: boolean = false;
 
   analyticsFormControl() {
     const formControl = this.formControlField;
@@ -52,5 +47,23 @@ export class FormControlFieldComponent {
       errorKey: errorsKey[0],
       status: formControl?.status?.toLowerCase() ?? '',
     };
+  }
+
+  _onChange = (_: any) => {};
+  _onTouched = () => {};
+
+  writeValue(value: any): void {
+    if (value !== this.controlValue) {
+      this.controlValue = value;
+    }
+  }
+  registerOnChange(fn: (_: any) => void): void {
+    this._onChange = fn;
+  }
+  registerOnTouched(fn: () => void): void {
+    this._onTouched = fn;
+  }
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
   }
 }

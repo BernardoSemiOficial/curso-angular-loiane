@@ -3,18 +3,12 @@
     <app-form-control-field
       fieldName="name"
       label="Name"
+      formControlName="name"
+      [formControlField]="form.get('name')"
       [message]="{
         required: { text: 'Name is required.', type: MessageType.alertWarning }
       }"
-      [formControlField]="form.get('name')"
     >
-      <input
-        id="name"
-        type="name"
-        name="name"
-        class="form-control"
-        formControlName="name"
-      />
     </app-form-control-field>
   </fieldset>
   <fieldset class="col-sm-12 mb-3">
@@ -82,20 +76,16 @@
         <app-form-control-field
           fieldName="number"
           label="Number"
+          type="number"
+          id="number"
+          [formControlField]="form.get('address.number')"
           [message]="{
             required: {
               text: 'Number is required.',
               type: MessageType.alertWarning
             }
           }"
-          [formControlField]="form.get('address.number')"
         >
-          <input
-            type="number"
-            class="form-control"
-            id="number"
-            formControlName="number"
-          />
         </app-form-control-field>
       </div>
       <div class="col-sm-6 mb-3">
