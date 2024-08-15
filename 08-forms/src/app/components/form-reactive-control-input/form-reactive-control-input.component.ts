@@ -7,10 +7,7 @@ import {
   NG_VALUE_ACCESSOR,
   NgModel,
 } from '@angular/forms';
-import {
-  FormControlFieldComponent,
-  MessageType,
-} from '../form-control-field/form-control-field.component';
+import { MessageType } from '../form-control-field/form-control-field.component';
 
 @Component({
   selector: 'app-form-reactive-control-input',
@@ -19,7 +16,7 @@ import {
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => FormControlFieldComponent),
+      useExisting: forwardRef(() => FormReactiveControlInputComponent),
       multi: true,
     },
   ],
