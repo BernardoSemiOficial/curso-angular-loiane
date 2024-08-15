@@ -4,7 +4,10 @@
   [for]="fieldName"
   class="form-label"
   [ngClass]="{
-    'text-danger': formControlField?.touched && (formControlField?.errors?.['required'] || formControlField?.errors?.['email'] || formControlField?.errors?.['minLength'] || formControlField?.errors?.['invalid'] || formControlField?.errors?.['notIquals'] || formControlField?.errors?.['emailExists'])
+    'text-danger':
+      formControlField?.touched && formControlAnalytics.errorsLength,
+    'text-success':
+      formControlField?.touched && !formControlAnalytics.errorsLength
   }"
 >
   {{ label }}

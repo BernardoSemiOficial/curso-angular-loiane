@@ -17,6 +17,7 @@ export enum MessageType {
 })
 export class FormControlFieldComponent implements OnChanges {
   @Input() formControlField!: NgModel | AbstractControl | null;
+  @Input() formControlFieldValue!: any;
   @Input() fieldName!: string;
   @Input() label!: string;
   @Input() feedbackMessage: { [key: string]: string } = {
@@ -42,14 +43,13 @@ export class FormControlFieldComponent implements OnChanges {
   };
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
+    console.log('ngOnChanges', changes);
   }
 
   analyticsFormControl() {
     const formControl = this.formControlField;
     const errors = formControl?.errors;
     const errorsKey = Object.keys(errors ?? {});
-    console.log({ errors });
 
     return {
       errorsLength: errorsKey.length,
