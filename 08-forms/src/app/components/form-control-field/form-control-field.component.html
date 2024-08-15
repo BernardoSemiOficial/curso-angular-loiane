@@ -12,15 +12,7 @@
 >
   {{ label }}
 </label>
-<input
-  [id]="fieldName"
-  [type]="type"
-  class="form-control"
-  [disabled]="isDisabled"
-  [(ngModel)]="controlValue"
-  (ngModelChange)="_onChange(controlValue)"
-  (blur)="_onTouched()"
-/>
+<ng-content></ng-content>
 @if (formControlAnalytics.errorsLength && message[formControlAnalytics.errorKey]
 && formControlField?.touched) {
 <div
