@@ -15,10 +15,13 @@ import {
   MessageType,
 } from '../../components/form-control-field/form-control-field.component';
 import { FormReactiveControlInputComponent } from '../../components/form-reactive-control-input/form-reactive-control-input.component';
+import { BaseForm } from '../../models/base-form';
 import { FormsValidationService } from '../../services/forms/forms-validation.service';
 import {
+  CitiesBrazil,
   LocalizationBrazil,
   LocalizationService,
+  StateBrazil,
 } from '../../services/localization/localization.service';
 import { UsersService } from '../../services/users/users.service';
 
@@ -34,7 +37,7 @@ import { UsersService } from '../../services/users/users.service';
   templateUrl: './data-drive-form.component.html',
   styleUrl: './data-drive-form.component.scss',
 })
-export class DataDriveFormComponent implements OnInit {
+export class DataDriveFormComponent extends BaseForm implements OnInit {
   private formBuilder: FormBuilder = inject(FormBuilder);
   private localizationService: LocalizationService =
     inject(LocalizationService);
@@ -43,13 +46,25 @@ export class DataDriveFormComponent implements OnInit {
     FormsValidationService
   );
   private usersService: UsersService = inject(UsersService);
-  form!: FormGroup;
+
   states$ = this.localizationService.getStatesBrazil();
+  cities: CitiesBrazil[] = [];
   tecnologies: { id: number; nome: string }[] = [];
   frameworks: string[] = ['Angular', 'React', 'Vue', 'Svelte', 'Ember'];
   MessageType = MessageType;
 
+  constructor() {
+    super();
+  }
+
   ngOnInit() {
+    this.initForm();
+    this.getTecnologies();
+    this.observerFieldZip();
+    this.observerFieldState();
+  }
+
+  initForm() {
     // this.form = new FormGroup({
     //   name: new FormControl(null),
     //   email: new FormControl(null),
@@ -90,12 +105,21 @@ export class DataDriveFormComponent implements OnInit {
         state: [null, [Validators.required]],
       }),
     });
-
-    this.getTecnologies();
-    this.observarFieldZip();
   }
 
-  observarFieldZip() {
+  observerFieldState() {
+    this.getField('address.state')
+      ?.valueChanges.pipe(
+        switchMap((state: StateBrazil) =>
+          this.localizationService.getCitiesBrazil(state.id)
+        )
+      )
+      .subscribe((cities) => {
+        this.cities = cities;
+      });
+  }
+
+  observerFieldZip() {
     this.form
       .get('address.cep')
       ?.statusChanges.pipe(
@@ -120,7 +144,7 @@ export class DataDriveFormComponent implements OnInit {
       checked: FormControl<boolean | null>;
     }>
   > {
-    return this.form.get('frameworks') as FormArray;
+    return this.getField('frameworks') as FormArray;
   }
 
   buildFrameworks() {
@@ -133,12 +157,6 @@ export class DataDriveFormComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
     this.http.post('https://httpbin.org/post', this.form.value).subscribe({
       next: (data) => {
         console.log(data);
@@ -150,12 +168,8 @@ export class DataDriveFormComponent implements OnInit {
     });
   }
 
-  resetForm() {
-    this.form.reset();
-  }
-
   getAddress() {
-    const cep = this.form.get('address.cep')?.value;
+    const cep = this.getField('address.cep')?.value;
     console.log(cep);
 
     this.localizationService.validateAndGetAddress(cep).subscribe({
@@ -188,7 +202,7 @@ export class DataDriveFormComponent implements OnInit {
       nome: 'Alagoas',
     };
 
-    this.form.get('address.state')?.setValue(state);
+    this.getField('address.state')?.setValue(state);
   }
 
   compareFn(c1: any, c2: any): boolean {
@@ -206,6 +220,6 @@ export class DataDriveFormComponent implements OnInit {
   }
 
   selectAutoTecnologies() {
-    this.form.get('tecnologies')?.setValue([1, 3, 5]);
+    this.getField('tecnologies')?.setValue([1, 3, 5]);
   }
 }

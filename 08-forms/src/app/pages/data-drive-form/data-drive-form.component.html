@@ -1,4 +1,4 @@
-<form class="container mt-5" [formGroup]="form" (ngSubmit)="onSubmit()">
+<form class="container mt-5 pb-5" [formGroup]="form" (ngSubmit)="submit()">
   <fieldset class="col-sm-12 mb-3">
     <app-form-reactive-control-input
       fieldName="name"
@@ -19,7 +19,7 @@
       formControlName="email"
       [formControlField]="form.get('email')"
       [message]="{
-        required: { text: 'Email is required.', type: MessageType.alertDanger },
+        required: { text: 'Email is required.', type: MessageType.alertWarning },
         email: { text: 'Email is invalid.', type: MessageType.alertDanger },
         emailExists: { text: 'Email already exists.', type: MessageType.alertDanger },
         pending: { text: 'Checking email...', type: MessageType.alertWarning },
@@ -124,10 +124,9 @@
         </app-form-reactive-control-input>
       </div>
       <div class="col-sm-4 mb-3">
-        <app-form-reactive-control-input
+        <app-form-control-field
           fieldName="city"
           label="City"
-          formControlName="city"
           [formControlField]="form.get('address.city')"
           [message]="{
             required: {
@@ -136,7 +135,12 @@
             }
           }"
         >
-        </app-form-reactive-control-input>
+          <select class="form-control" id="city" formControlName="city">
+            @for (city of cities; track city.id) {
+            <option [value]="city.nome">{{ city.nome }}</option>
+            }
+          </select>
+        </app-form-control-field>
       </div>
       <div class="col-sm-3 mb-3">
         <app-form-control-field
