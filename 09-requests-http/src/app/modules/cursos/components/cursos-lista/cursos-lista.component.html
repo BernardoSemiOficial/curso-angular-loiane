@@ -1,11 +1,17 @@
 <section class="mt-5">
   <div class="d-flex align-items justify-content-between mb-5">
     <h1>Cursos</h1>
+    <button type="button" class="btn btn-primary" (click)="getCursos()">
+      buscar cursos
+    </button>
     <button type="button" class="btn btn-primary" routerLink="/create">
       novo curso
     </button>
   </div>
 
+  @let cursos = cursos$ | async;
+  <!--  -->
+  @if (cursos) {
   <table class="table">
     <thead>
       <tr>
@@ -17,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (curso of cursos$ | async; track curso.id) {
+      @for (curso of cursos; track curso.id) {
       <tr>
         <th scope="row">{{ curso.id }}</th>
         <td>{{ curso.nome }}</td>
@@ -43,4 +49,7 @@
       }
     </tbody>
   </table>
+  } @else {
+  <p class="text-center p-2">Carregando cursos...</p>
+  }
 </section>

@@ -18,4 +18,8 @@ export class CursosListaComponent {
   deleteCurso(cursoId: number) {
     console.log(cursoId);
   }
+
+  getCursos() {
+    this.cursosService.getCursos().subscribe();
+  }
 }
