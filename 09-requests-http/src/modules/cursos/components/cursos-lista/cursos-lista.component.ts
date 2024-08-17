@@ -1,10 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Curso } from '../../models/cursos.model';
+import { CursosService } from '../../services/cursos.service';
 
 @Component({
   selector: 'app-cursos-lista',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './cursos-lsita.component.html',
+  imports: [CommonModule, RouterModule],
+  templateUrl: './cursos-lista.component.html',
 })
-export class CursosListaComponent {}
+export class CursosListaComponent {
+  private cursosService: CursosService = inject(CursosService);
+  cursos: Observable<Curso[]> = this.cursosService.getCursos();
+
+  deleteCurso(cursoId: number) {
+    console.log(cursoId);
+  }
+}

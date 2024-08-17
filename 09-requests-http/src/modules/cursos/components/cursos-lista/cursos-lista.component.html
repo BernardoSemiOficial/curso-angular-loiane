@@ -1,0 +1,46 @@
+<section class="mt-5">
+  <div class="d-flex align-items justify-content-between mb-5">
+    <h1>Cursos</h1>
+    <button type="button" class="btn btn-primary" routerLink="/create">
+      novo curso
+    </button>
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Curso</th>
+        <th scope="col">
+          <p class="d-flex justify-content-end">ações</p>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (curso of cursos | async; track curso.id) {
+      <tr>
+        <th scope="row">{{ curso.id }}</th>
+        <td>{{ curso.nome }}</td>
+        <td>
+          <div class="d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-warning"
+              [routerLink]="['edit', curso.id]"
+            >
+              editar
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger ms-1"
+              (click)="deleteCurso(curso.id)"
+            >
+              excluir
+            </button>
+          </div>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</section>
