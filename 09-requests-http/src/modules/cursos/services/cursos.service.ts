@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { environment } from '../../../environments/environment';
 import { Curso } from '../models/cursos.model';
 
 @Injectable({
@@ -7,7 +8,7 @@ import { Curso } from '../models/cursos.model';
 })
 export class CursosService {
   private http = inject(HttpClient);
-  private readonly API_URL = 'http://localhost:3000/cursos';
+  private readonly API_URL = `${environment.apiUrl}/cursos`;
 
   getCursos() {
     return this.http.get<Curso[]>(this.API_URL);

@@ -13,7 +13,7 @@ import { CursosService } from '../../services/cursos.service';
 })
 export class CursosListaComponent {
   private cursosService: CursosService = inject(CursosService);
-  cursos: Observable<Curso[]> = this.cursosService.getCursos();
+  cursos$: Observable<Curso[]> = this.cursosService.getCursos();
 
   deleteCurso(cursoId: number) {
     console.log(cursoId);

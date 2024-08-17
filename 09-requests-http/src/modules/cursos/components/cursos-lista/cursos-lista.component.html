@@ -17,7 +17,7 @@
       </tr>
     </thead>
     <tbody>
-      @for (curso of cursos | async; track curso.id) {
+      @for (curso of cursos$ | async; track curso.id) {
       <tr>
         <th scope="row">{{ curso.id }}</th>
         <td>{{ curso.nome }}</td>
