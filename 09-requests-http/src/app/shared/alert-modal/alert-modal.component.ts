@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { AlertModule } from 'ngx-bootstrap/alert';
 
 type AlertType = { type: string; msg: string; timeout: number };
@@ -13,25 +13,26 @@ type AlertType = { type: string; msg: string; timeout: number };
     <alert
       [type]="alert.type"
       [dismissOnTimeout]="alert.timeout"
+      [dismissible]="dismissible"
       (onClosed)="onClosed(alert)"
     >
       {{ alert.msg }}
     </alert>
     }
   `,
-  styleUrl: './alert-modal.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrl: './alert-modal.component.scss',
 })
 export class AlertModalComponent {
   alerts: AlertType[] = [];
   dismissible = true;
+  timeout = 3000;
 
   pushAlert(alert: Partial<AlertType>): void {
     if (alert.type && alert.msg) {
       this.alerts.push({
         type: alert.type,
         msg: alert.msg,
-        timeout: 2000,
+        timeout: this.timeout,
       });
     }
   }
